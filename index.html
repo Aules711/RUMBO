@@ -208,7 +208,7 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
 .lbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 20px; }
 .lbrand { display: flex; align-items: center; gap: 10px; font: 800 26px/1 var(--display); letter-spacing: -.02em; }
 .lbrand svg { width: 34px; height: 34px; border-radius: 9px; box-shadow: 0 0 0 1px rgba(255,255,255,.25); }
-.lbtn { min-height: 46px; padding: 8px 20px; border-radius: 12px; font-weight: 700; border: 0; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+.lbtn { gap: 6px; min-height: 46px; padding: 8px 20px; border-radius: 12px; font-weight: 700; border: 0; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
 .lbtn.solid { background: var(--needle); color: #241a00; }
 .lbtn.solid:hover { filter: brightness(1.06); }
 .lbtn.line { background: transparent; color: var(--hero-ink); box-shadow: inset 0 0 0 2px rgba(255,255,255,.45); }
@@ -255,6 +255,51 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
 .final h2 { font: 800 clamp(30px, 5vw, 48px)/1.05 var(--display); letter-spacing: -.03em; text-wrap: balance; }
 .lfoot { color: var(--muted); font-size: 14px; padding-block: 24px; }
 .auth-back { align-self: flex-start; padding-left: 0; }
+.lbrand { color: inherit; text-decoration: none; }
+.menu { position: relative; }
+.menu-list { position: absolute; z-index: 25; right: 0; top: calc(100% + 8px); width: 220px; display: flex; flex-direction: column; padding: 6px; background: var(--surface); color: var(--ink); border-radius: 14px; box-shadow: 0 16px 40px rgba(8,12,50,.32); }
+.menu-list[hidden] { display: none; }
+.menu-list a, .menu-list button { display: flex; align-items: center; min-height: 46px; padding: 8px 12px; border: 0; border-radius: 9px; background: none; color: inherit; font-weight: 600; text-align: left; text-decoration: none; width: 100%; }
+.menu-list a:hover, .menu-list button:hover { background: var(--sunk); }
+.aboutgrid { padding-block: 44px 96px; max-width: 880px; }
+.aboutgrid h1 { font: 800 clamp(44px, 7.4vw, 84px)/1 var(--display); letter-spacing: -.04em; text-wrap: balance; }
+.aboutgrid h1 em { font-style: normal; color: var(--needle); }
+.deep { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 64px; align-items: center; }
+.deep + .deep { margin-top: 72px; }
+.deep.flip > :first-child { order: 2; }
+.deep h3 { margin: 0 0 10px; font: 800 clamp(26px, 3.6vw, 36px)/1.08 var(--display); letter-spacing: -.025em; text-wrap: balance; }
+.deep p { color: var(--muted); font-size: 18px; max-width: 32em; }
+.shot { background: var(--surface); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.shot h4 { margin: 0; font: 800 20px/1.1 var(--display); }
+.shot .row { padding: 9px 2px; min-height: 0; }
+.problem { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px 64px; align-items: start; }
+.problem p { font-size: 20px; line-height: 1.5; color: var(--muted); }
+.day-line { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.day-line li { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.day-line span { font: 700 15px/1 var(--display); color: var(--accent); }
+.day-line h3 { margin: 0; font: 700 22px/1.2 var(--display); }
+.day-line p { color: var(--muted); }
+.plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 36px; align-items: stretch; }
+.plan { background: var(--surface); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.plan.pro { background: var(--hero); color: var(--hero-ink); }
+.plan h3 { margin: 0; font: 800 26px/1 var(--display); }
+.plan .price { font: 800 44px/1 var(--display); letter-spacing: -.03em; }
+.plan.pro .price { color: var(--needle); font-size: 34px; line-height: 44px; }
+.plan ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.plan li { display: flex; gap: 10px; }
+.plan li::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: 8px; background: var(--today); transform: rotate(45deg); }
+.plan .btn-wrap { margin-top: auto; padding-top: 8px; }
+.plan .solid-a { background: var(--accent); color: var(--on-accent); }
+.faq { margin-top: 32px; display: flex; flex-direction: column; gap: 8px; max-width: 760px; }
+.faq details { background: var(--surface); border-radius: 12px; padding: 14px 16px; }
+.faq summary { font-weight: 700; cursor: pointer; }
+.faq p { color: var(--muted); margin-top: 8px; }
+@media (max-width: 860px) {
+  .deep, .problem, .plans { grid-template-columns: minmax(0, 1fr); }
+  .deep.flip > :first-child { order: 0; }
+  .day-line { grid-template-columns: minmax(0, 1fr); }
+  .aboutgrid { padding-block: 24px 64px; }
+}
 @media (max-width: 860px) {
   .herogrid, .private { grid-template-columns: minmax(0, 1fr); }
   .herogrid { padding-block: 24px 64px; gap: 44px; }
@@ -272,8 +317,15 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
     <svg class="bignd" viewBox="0 0 512 512" aria-hidden="true"><g transform="rotate(35 256 256)"><polygon points="256,20 340,256 172,256" fill="#ffffff"/><polygon points="172,256 340,256 256,492" fill="#ffffff"/></g></svg>
     <div class="wrap">
       <div class="lbar">
-        <div class="lbrand"><svg aria-hidden="true" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#3346d3" stroke="none"/><g transform="rotate(35 256 256)"><polygon points="256,72 322,256 190,256" fill="#f2b632" stroke="none"/><polygon points="190,256 322,256 256,440" fill="#ffffff" stroke="none"/></g></svg>Rumbo</div>
-        <button type="button" class="lbtn line" data-land="login">Entrar</button>
+        <a class="lbrand" href="#inicio"><svg aria-hidden="true" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#3346d3" stroke="none"/><g transform="rotate(35 256 256)"><polygon points="256,72 322,256 190,256" fill="#f2b632" stroke="none"/><polygon points="190,256 322,256 256,440" fill="#ffffff" stroke="none"/></g></svg>Rumbo</a>
+        <div class="menu">
+          <button type="button" class="lbtn line" data-menu aria-expanded="false" aria-controls="menu-a">Menú <span aria-hidden="true">▾</span></button>
+          <div class="menu-list" id="menu-a" hidden>
+            <a href="#que-es-rumbo">Qué es Rumbo</a>
+            <button type="button" data-land="login">Iniciar sesión</button>
+            <button type="button" data-land="signup">Registrarse</button>
+          </div>
+        </div>
       </div>
       <div class="herogrid">
         <div>
@@ -281,7 +333,7 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
           <p class="lead">Tus horarios, tareas, hábitos y objetivos en un solo sitio. Abres la app y sabes qué te toca hoy.</p>
           <div class="cta">
             <button type="button" class="lbtn solid" data-land="signup">Crear cuenta gratis</button>
-            <a class="lbtn line" href="#funciones">Ver qué incluye</a>
+            <a class="lbtn line" href="#que-es-rumbo">Qué es Rumbo</a>
           </div>
           <p class="freenote">Funciona en el móvil y en el ordenador.</p>
         </div>
@@ -359,6 +411,103 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
       <button type="button" class="lbtn solid" data-land="signup">Crear cuenta gratis</button>
     </div>
   </section>
+  <footer class="wrap lfoot">Rumbo</footer>
+</div>
+
+<div id="about" hidden>
+  <section class="hero">
+    <svg class="bignd" viewBox="0 0 512 512" aria-hidden="true"><g transform="rotate(35 256 256)"><polygon points="256,20 340,256 172,256" fill="#ffffff"/><polygon points="172,256 340,256 256,492" fill="#ffffff"/></g></svg>
+    <div class="wrap">
+      <div class="lbar">
+        <a class="lbrand" href="#inicio"><svg aria-hidden="true" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#3346d3" stroke="none"/><g transform="rotate(35 256 256)"><polygon points="256,72 322,256 190,256" fill="#f2b632" stroke="none"/><polygon points="190,256 322,256 256,440" fill="#ffffff" stroke="none"/></g></svg>Rumbo</a>
+        <div class="menu">
+          <button type="button" class="lbtn line" data-menu aria-expanded="false" aria-controls="menu-b">Menú <span aria-hidden="true">▾</span></button>
+          <div class="menu-list" id="menu-b" hidden>
+            <a href="#que-es-rumbo">Qué es Rumbo</a>
+            <button type="button" data-land="login">Iniciar sesión</button>
+            <button type="button" data-land="signup">Registrarse</button>
+          </div>
+        </div>
+      </div>
+      <div class="aboutgrid">
+        <h1>Rumbo es el sitio donde tu semana <em>cobra sentido</em>.</h1>
+        <p class="lead">Una app sencilla para saber qué tienes hoy, qué te queda por hacer y hacia dónde vas.</p>
+        <div class="cta"><button type="button" class="lbtn solid" data-land="signup">Registrarse gratis</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lsec">
+    <div class="wrap problem">
+      <h2>Tu vida no cabe en cinco apps distintas.</h2>
+      <p>El entrenamiento está en un chat, el examen en el calendario, los recados en una nota y tus propósitos en ningún sitio. Rumbo lo junta todo en un lugar, para que dejes de recordar cosas y empieces a hacerlas.</p>
+    </div>
+  </section>
+
+  <section class="lsec band">
+    <div class="wrap">
+      <div class="deep">
+        <div><h3>Abres Hoy y ya sabes qué te toca</h3><p>Tus planes, tareas y hábitos del día aparecen en una sola pantalla. Lo que se te quedó atrasado también, para que no se pierda.</p></div>
+        <div class="shot" aria-hidden="true"><h4>Lunes 9</h4>
+          <div class="row"><span class="time">17:00–18:00</span><div class="main">Clase de inglés</div></div>
+          <div class="row"><span class="tick"></span><div class="main">Llamar al dentista<div class="sub"><span class="late">Atrasada</span></div></div></div>
+          <div class="row"><span class="tick on"></span><div class="main">Salir a correr</div><span class="streak">12 días</span></div>
+        </div>
+      </div>
+      <div class="deep flip">
+        <div><h3>Lo fijo se apunta una sola vez</h3><p>Fútbol los martes, clase los jueves o el turno de los sábados. Eliges los días y la hora, y Rumbo lo coloca en tu calendario cada semana.</p></div>
+        <div class="shot" aria-hidden="true"><h4>Cosas fijas cada semana</h4>
+          <div class="row"><span class="time">19:00–20:30</span><div class="main">Fútbol<div class="sub">Martes</div></div><span class="pill fijo">Fijo</span></div>
+          <div class="row"><span class="time">16:00–18:00</span><div class="main">Clase<div class="sub">Lunes y jueves</div></div><span class="pill fijo">Fijo</span></div>
+        </div>
+      </div>
+      <div class="deep">
+        <div><h3>Lo pequeño de cada día te acerca a lo grande</h3><p>Marca tus hábitos, mantén la racha y sigue el avance de tus objetivos. Las ideas sueltas se quedan guardadas en tus notas.</p></div>
+        <div class="shot" aria-hidden="true"><h4>Terminar un curso</h4>
+          <div class="demo" style="display:flex;align-items:center;gap:10px"><div class="meter" style="max-width:none;flex:1"><i></i></div><strong>65%</strong></div>
+          <div class="days"><span class="d on" style="display:grid;place-items:center">L</span><span class="d on" style="display:grid;place-items:center">M</span><span class="d on" style="display:grid;place-items:center">X</span><span class="d" style="display:grid;place-items:center">J</span><span class="d" style="display:grid;place-items:center">V</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lsec">
+    <div class="wrap">
+      <h2>Un día con Rumbo.</h2>
+      <ol class="day-line">
+        <li><span>Por la mañana</span><h3>Miras Hoy</h3><p>Ves de un vistazo tus planes y lo más urgente.</p></li>
+        <li><span>Durante el día</span><h3>Apuntas al momento</h3><p>Una tarea o una idea se guardan en segundos.</p></li>
+        <li><span>Por la noche</span><h3>Cierras el día</h3><p>Marcas lo hecho y sumas un día a tus rachas.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="lsec band">
+    <div class="wrap">
+      <h2>Planes.</h2>
+      <div class="plans">
+        <article class="plan"><h3>Gratis</h3><div class="price">0 €</div>
+          <ul><li>Calendario de mes y semana</li><li>Horarios fijos</li><li>Tareas, hábitos, notas y objetivos</li><li>Móvil y ordenador</li></ul>
+          <div class="btn-wrap"><button type="button" class="lbtn solid-a" data-land="signup">Registrarse</button></div></article>
+        <article class="plan pro"><h3>Premium</h3><div class="price">Próximamente</div>
+          <p>Estamos preparando un plan con más funciones para quienes quieran sacarle todo el partido a Rumbo.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="lsec">
+    <div class="wrap">
+      <h2>Preguntas frecuentes.</h2>
+      <div class="faq">
+        <details><summary>¿Rumbo es gratis?</summary><p>Sí. Puedes crear tu cuenta y usar todas las funciones actuales sin pagar.</p></details>
+        <details><summary>¿Tengo que instalar algo?</summary><p>No. Funciona en el navegador, y en el móvil puedes añadirla a la pantalla de inicio.</p></details>
+        <details><summary>¿Quién puede ver mis datos?</summary><p>Tu cuenta solo muestra tus datos; los demás usuarios no pueden verlos.</p></details>
+        <details><summary>¿Y si olvido la contraseña?</summary><p>En Iniciar sesión pulsa «He olvidado la contraseña» y te enviaremos un enlace por email.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final"><div class="wrap"><h2>Empieza a ordenar tu semana.</h2><button type="button" class="lbtn solid" data-land="signup">Registrarse gratis</button></div></section>
   <footer class="wrap lfoot">Rumbo</footer>
 </div>
 
@@ -755,7 +904,7 @@ document.querySelectorAll(".nav a").forEach(a => a.addEventListener("click", e =
   e.preventDefault(); show(a.dataset.v);
   try { location.hash = a.dataset.v; } catch (err) {}
 }));
-addEventListener("hashchange", () => { if (uid) show(location.hash.slice(1)); });
+addEventListener("hashchange", () => { if (uid) return show(location.hash.slice(1)); if (!$("auth").hidden) return; const before = $("about").hidden; pubView(); if (before !== $("about").hidden) window.scrollTo(0, 0); });
 
 async function loadItems() {
   const owner = uid;
@@ -816,9 +965,17 @@ $("f-auth").addEventListener("submit", async e => {
   btn.disabled = false;
 });
 let firstAuth = true;
-function openAuth(mode) { authMsg(""); setAuth(mode); $("landing").hidden = true; $("auth").hidden = false; window.scrollTo(0, 0); }
+const closeMenus = () => document.querySelectorAll("[data-menu]").forEach(b => { b.setAttribute("aria-expanded", "false"); b.nextElementSibling.hidden = true; });
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-menu]");
+  if (b) { const open = b.getAttribute("aria-expanded") === "true"; closeMenus(); b.setAttribute("aria-expanded", !open); b.nextElementSibling.hidden = open; return; }
+  closeMenus();
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenus(); });
+function pubView() { const a = location.hash === "#que-es-rumbo"; $("about").hidden = !a; $("landing").hidden = a; }
+function openAuth(mode) { closeMenus(); authMsg(""); setAuth(mode); $("landing").hidden = true; $("about").hidden = true; $("auth").hidden = false; window.scrollTo(0, 0); }
 document.querySelectorAll("[data-land]").forEach(b => b.addEventListener("click", () => openAuth(b.dataset.land)));
-$("auth-back").addEventListener("click", () => { $("auth").hidden = true; $("landing").hidden = false; window.scrollTo(0, 0); });
+$("auth-back").addEventListener("click", () => { $("auth").hidden = true; pubView(); window.scrollTo(0, 0); });
 function applySession(session) {
   if (recovering) return;
   const next = session ? session.user.id : null;
@@ -826,7 +983,7 @@ function applySession(session) {
   if (!next && !uid && !firstAuth) return;
   firstAuth = false;
   uid = next; items = new Map(); loaded = false;
-  $("auth").hidden = true; $("landing").hidden = !!uid; $("app").hidden = !uid;
+  $("auth").hidden = true; $("app").hidden = !uid; if (uid) { $("landing").hidden = true; $("about").hidden = true; } else pubView();
   if (uid) {
     $("who").textContent = session.user.email || "";
     $("auth-pass").value = ""; authMsg("");
@@ -846,7 +1003,7 @@ function boot() {
   try { if (Object.keys(localStorage).some(k => k.startsWith("sb-") && k.endsWith("-auth-token"))) $("landing").hidden = true; } catch (e) {}
   sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   sb.auth.onAuthStateChange((event, session) => {
-    if (event === "PASSWORD_RECOVERY") { recovering = true; $("app").hidden = true; $("landing").hidden = true; $("auth").hidden = false; authMsg(""); setAuth("newpass"); return; }
+    if (event === "PASSWORD_RECOVERY") { recovering = true; $("app").hidden = true; $("landing").hidden = true; $("about").hidden = true; $("auth").hidden = false; authMsg(""); setAuth("newpass"); return; }
     setTimeout(() => applySession(session), 0);
   });
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && uid) loadItems(); });
