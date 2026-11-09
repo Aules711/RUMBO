@@ -7,6 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Rumbo">
 <title>Rumbo</title>
+<script>try{var t=localStorage.getItem("rumbo-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="description" content="Rumbo reúne tu calendario, tus horarios fijos, tareas, hábitos y objetivos en una sola app gratuita para móvil y ordenador.">
 <meta property="og:title" content="Rumbo: tu semana bajo control">
 <meta property="og:description" content="Calendario, horarios fijos, tareas, hábitos y objetivos en una sola app gratuita.">
@@ -308,6 +309,75 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
   .bignd { width: 520px; height: 520px; right: -190px; top: -60px; }
   .mock { transform: none; }
 }
+
+:root { --c1:#6233bd;--c1s:#ece4fb;--c2:#1b7450;--c2s:#d9f1e6;--c3:#8f5400;--c3s:#fbecd0;--c4:#b5246f;--c4s:#fbe1ef; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --c1:#c7aefb;--c1s:#3a2b63;--c2:#8ad9b6;--c2s:#1c4435;--c3:#f3c67a;--c3s:#4a3514;--c4:#f6a6cf;--c4s:#552240; } }
+:root[data-theme="dark"] { --c1:#c7aefb;--c1s:#3a2b63;--c2:#8ad9b6;--c2s:#1c4435;--c3:#f3c67a;--c3s:#4a3514;--c4:#f6a6cf;--c4s:#552240; }
+.cat-estudios { background: var(--c1s) !important; color: var(--c1); }
+.cat-deporte { background: var(--c2s) !important; color: var(--c2); }
+.cat-trabajo { background: var(--c3s) !important; color: var(--c3); }
+.cat-personal { background: var(--c4s) !important; color: var(--c4); }
+.dots i.cat-estudios { background: var(--c1) !important; }
+.dots i.cat-deporte { background: var(--c2) !important; }
+.dots i.cat-trabajo { background: var(--c3) !important; }
+.dots i.cat-personal { background: var(--c4) !important; }
+.cell { cursor: pointer; }
+.cell.over, .day.over { box-shadow: inset 0 0 0 2px var(--today); }
+[draggable="true"] { cursor: grab; }
+.chip > div[data-act] { cursor: pointer; }
+.row .play { color: var(--accent); font-size: 14px; }
+.linkish { background: none; border: 0; padding: 0; color: var(--accent); font-weight: 600; font-size: 14px; }
+dialog { border: 0; border-radius: 18px; padding: 20px; width: min(460px, calc(100vw - 32px)); background: var(--surface); color: var(--ink); }
+dialog::backdrop { background: rgba(8,12,40,.5); }
+#ed-form { display: flex; flex-direction: column; gap: 10px; }
+#ed-form h2 { margin: 0 0 4px; }
+#ed-form input[type="text"], #ed-form select, #ed-form textarea, #ed-form input[type="date"], #ed-form input[type="time"] { width: 100%; background: var(--bg); }
+#ed-form label { display: flex; flex-direction: column; gap: 4px; color: var(--muted); font-size: 14px; }
+.ed-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.ed-act { display: flex; justify-content: flex-end; gap: 8px; margin-top: 6px; }
+.btn.sec { background: var(--sunk); color: var(--ink); }
+.skips { display: flex; flex-wrap: wrap; gap: 6px; }
+.focus { position: fixed; z-index: 40; inset: 0; background: var(--hero); color: var(--hero-ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 24px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); text-align: center; }
+.focus .needle { width: 150px; height: 150px; transition: transform .5s linear; }
+.focus .clock { font: 800 clamp(72px, 18vw, 140px)/1 var(--display); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.focus .what { font-size: 20px; color: var(--hero-soft); overflow-wrap: anywhere; max-width: 30em; }
+.focus .row-b { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.stat { background: var(--surface); border-radius: 14px; padding: 14px; min-width: 0; }
+.stat b { display: block; font: 800 34px/1 var(--display); color: var(--accent); font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: 14px; }
+.bars { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; align-items: end; height: 190px; background: var(--surface); border-radius: 14px; padding: 14px; }
+.bar { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; height: 100%; min-width: 0; }
+.bar i { display: block; width: 100%; max-width: 44px; background: var(--accent); border-radius: 6px 6px 0 0; min-height: 2px; }
+.bar b { font-size: 13px; font-variant-numeric: tabular-nums; }
+.bar span { font-size: 12px; color: var(--muted); }
+.badges { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.badge { background: var(--surface); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.badge svg { width: 28px; height: 28px; margin-bottom: 6px; }
+.badge.off { opacity: .45; }
+.badge strong { font-family: var(--display); }
+.badge span { color: var(--muted); font-size: 13px; }
+.lsub { color: var(--muted); font-size: 18px; margin-top: 10px; max-width: 36em; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.chips button { min-height: 42px; padding: 6px 16px; border-radius: 99px; border: 0; background: var(--surface); font-weight: 600; }
+.chips button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+#f-demo { margin-top: 12px; }
+.demo-msg { min-height: 22px; margin-top: 8px; color: var(--accent); font-weight: 600; font-size: 15px; }
+.demo-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.demo-day { background: var(--surface); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 6px; min-height: 150px; min-width: 0; }
+.demo-day h3 { margin: 0; font: 700 14px/1.2 var(--display); color: var(--muted); }
+.demo-day .chip { border: 0; text-align: left; width: 100%; color: inherit; }
+.scrollc { position: fixed; z-index: 15; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: 58px; height: 58px; border-radius: 50%; border: 0; padding: 7px; background: var(--surface); box-shadow: 0 8px 24px rgba(8,12,50,.3); }
+.scrollc svg { display: block; width: 100%; height: 100%; transform: rotate(calc(var(--spin, 0) * 1deg)); }
+.bignd { transform: rotate(calc(var(--spin, 0) * .35deg)); }
+.confetti { position: fixed; inset: 0; z-index: 60; pointer-events: none; width: 100%; height: 100%; }
+@media (max-width: 860px) {
+  .demo-week { grid-template-columns: minmax(0, 1fr); }
+  .demo-day { min-height: 0; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .badges { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) { .x { width: 30px; } .nav a { font-size: 11px; } }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 </head>
@@ -324,6 +394,7 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
             <a href="#que-es-rumbo">Qué es Rumbo</a>
             <button type="button" data-land="login">Iniciar sesión</button>
             <button type="button" data-land="signup">Registrarse</button>
+            <button type="button" data-theme-toggle><span class="theme-label">Modo oscuro</span></button>
           </div>
         </div>
       </div>
@@ -351,6 +422,24 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
             <div class="row"><span class="tick on"></span><div class="main"><div class="title">Leer 20 minutos</div></div><span class="streak">5 días</span></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lsec band" id="prueba">
+    <div class="wrap">
+      <h2>Monta tu semana aquí mismo.</h2>
+      <p class="lsub">Elige lo que haces o escríbelo como te salga. No hace falta registrarse para probarlo.</p>
+      <div class="chips" id="demo-chips"></div>
+      <form class="add" id="f-demo">
+        <input class="grow" type="text" id="demo-input" placeholder="Prueba: dentista viernes 10:30" aria-label="Escribe un plan" autocomplete="off">
+        <button class="btn">Añadir</button>
+      </form>
+      <div class="demo-msg" id="demo-msg" role="status"></div>
+      <div class="demo-week" id="demo-week"></div>
+      <div class="cta">
+        <button type="button" class="btn" id="demo-save">Guardar mi semana y registrarme</button>
+        <button type="button" class="btn sec" id="demo-clear">Empezar de cero</button>
       </div>
     </div>
   </section>
@@ -411,7 +500,8 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
       <button type="button" class="lbtn solid" data-land="signup">Crear cuenta gratis</button>
     </div>
   </section>
-  <footer class="wrap lfoot">Rumbo</footer>
+   <footer class="wrap lfoot">Rumbo</footer>
+  <button type="button" class="scrollc" data-top aria-label="Volver arriba"><svg viewBox="0 0 512 512" aria-hidden="true"><polygon points="256,40 330,256 182,256" fill="#f2b632"/><polygon points="182,256 330,256 256,472" fill="#3346d3"/></svg></button>
 </div>
 
 <div id="about" hidden>
@@ -426,6 +516,7 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
             <a href="#que-es-rumbo">Qué es Rumbo</a>
             <button type="button" data-land="login">Iniciar sesión</button>
             <button type="button" data-land="signup">Registrarse</button>
+            <button type="button" data-theme-toggle><span class="theme-label">Modo oscuro</span></button>
           </div>
         </div>
       </div>
@@ -487,7 +578,7 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
       <h2>Planes.</h2>
       <div class="plans">
         <article class="plan"><h3>Gratis</h3><div class="price">0 €</div>
-          <ul><li>Calendario de mes y semana</li><li>Horarios fijos</li><li>Tareas, hábitos, notas y objetivos</li><li>Móvil y ordenador</li></ul>
+          <ul><li>Calendario de mes y semana</li><li>Horarios fijos</li><li>Tareas, hábitos, notas y objetivos</li><li>Modo concentración y resumen semanal</li><li>Móvil y ordenador</li></ul>
           <div class="btn-wrap"><button type="button" class="lbtn solid-a" data-land="signup">Registrarse</button></div></article>
         <article class="plan pro"><h3>Premium</h3><div class="price">Próximamente</div>
           <p>Estamos preparando un plan con más funciones para quienes quieran sacarle todo el partido a Rumbo.</p></article>
@@ -508,7 +599,8 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
   </section>
 
   <section class="final"><div class="wrap"><h2>Empieza a ordenar tu semana.</h2><button type="button" class="lbtn solid" data-land="signup">Registrarse gratis</button></div></section>
-  <footer class="wrap lfoot">Rumbo</footer>
+   <footer class="wrap lfoot">Rumbo</footer>
+  <button type="button" class="scrollc" data-top aria-label="Volver arriba"><svg viewBox="0 0 512 512" aria-hidden="true"><polygon points="256,40 330,256 182,256" fill="#f2b632"/><polygon points="182,256 330,256 256,472" fill="#3346d3"/></svg></button>
 </div>
 
 <div class="auth" id="auth" hidden>
@@ -537,6 +629,7 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
     <a href="#semana" data-v="semana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendario</a>
     <a href="#habitos" data-v="habitos"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5"/></svg>Hábitos</a>
     <a href="#notas" data-v="notas"><svg viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5zM9 12h6M9 16h6M9 8h2"/></svg>Notas</a>
+    <a href="#resumen" data-v="resumen"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Resumen</a>
   </nav>
 
   <main>
@@ -546,8 +639,9 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
       <header class="head"><h1 id="hoy-title"></h1><p id="hoy-sub"></p></header>
       <div id="hoy-banner"></div>
       <form class="add" id="f-quick">
-        <input class="grow" type="text" id="quick-title" placeholder="Añade algo para hoy" aria-label="Nueva tarea para hoy" autocomplete="off" required>
+        <input class="grow" type="text" id="quick-title" placeholder="Escribe: fútbol todos los martes 19:00-20:30" aria-label="Añadir en lenguaje natural" autocomplete="off" required>
         <button class="btn">Añadir</button>
+        <button type="button" class="btn sec" data-act="focus">Concentrarme</button>
       </form>
       <div class="split">
         <div class="stack" style="gap:24px">
@@ -559,7 +653,7 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
           <div class="section"><h2>Objetivos</h2><div id="hoy-goals"></div></div>
         </div>
       </div>
-      <div class="account"><span id="who"></span><button type="button" class="ghost" data-act="logout">Cerrar sesión</button></div>
+      <div class="account"><span id="who"></span><button type="button" class="ghost" data-theme-toggle><span class="theme-label">Modo oscuro</span></button><button type="button" class="ghost" data-act="logout">Cerrar sesión</button></div>
     </section>
 
     <section class="view" id="v-tareas" hidden>
@@ -567,6 +661,7 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
       <form class="add" id="f-task">
         <input class="grow" type="text" id="task-title" placeholder="¿Qué tienes que hacer?" aria-label="Tarea" autocomplete="off" required>
         <select id="task-prio" aria-label="Prioridad"><option value="alta">Alta</option><option value="media" selected>Media</option><option value="baja">Baja</option></select>
+        <select id="task-cat" aria-label="Categoría"><option value="">Sin categoría</option><option value="estudios">Estudios</option><option value="deporte">Deporte</option><option value="trabajo">Trabajo</option><option value="personal">Personal</option></select>
         <input type="date" id="task-due" aria-label="Fecha límite">
         <button class="btn">Añadir tarea</button>
       </form>
@@ -605,6 +700,7 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
           </div>
           <div class="fields">
             <input class="grow" type="text" id="ev-title" placeholder="Por ejemplo, fútbol" aria-label="Nombre del plan" autocomplete="off" required>
+            <select id="ev-cat" aria-label="Categoría"><option value="">Sin categoría</option><option value="estudios">Estudios</option><option value="deporte">Deporte</option><option value="trabajo">Trabajo</option><option value="personal">Personal</option></select>
             <input type="date" id="ev-date" aria-label="Día">
             <div class="days" id="ev-days" hidden>
               <button type="button" class="d" data-act="wd" data-w="0" aria-pressed="false" aria-label="Lunes">L</button>
@@ -622,6 +718,14 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
         </form>
       </div>
       <div class="section"><h2>Cosas fijas cada semana</h2><div id="fixed-list"></div></div>
+    </section>
+
+    <section class="view" id="v-resumen" hidden>
+      <header class="head"><h1>Resumen</h1><p id="res-sub"></p></header>
+      <div class="stats" id="res-stats"></div>
+      <div class="section"><h2>Tareas hechas esta semana</h2><div class="bars" id="res-chart"></div></div>
+      <div class="section"><h2>Objetivos</h2><div id="res-goals" class="stack"></div></div>
+      <div class="section"><h2>Insignias</h2><div class="badges" id="res-badges"></div></div>
     </section>
 
     <section class="view" id="v-habitos" hidden>
@@ -656,6 +760,23 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
     </section>
   </main>
 </div>
+<dialog id="editor"><form id="ed-form" method="dialog"></form></dialog>
+<div class="focus" id="focus" hidden>
+  <svg class="needle" id="fo-needle" viewBox="0 0 512 512" aria-hidden="true"><polygon points="256,40 330,256 182,256" fill="#f2b632"/><polygon points="182,256 330,256 256,472" fill="#ffffff"/></svg>
+  <div class="clock" id="fo-clock" role="timer">25:00</div>
+  <div class="what" id="fo-what"></div>
+  <div class="row-b">
+    <button type="button" class="lbtn line" data-fo="15">15 min</button>
+    <button type="button" class="lbtn line" data-fo="25">25 min</button>
+    <button type="button" class="lbtn line" data-fo="50">50 min</button>
+    <button type="button" class="lbtn line" data-fo="5">Descanso 5</button>
+  </div>
+  <div class="row-b">
+    <button type="button" class="lbtn solid" id="fo-pause">Pausar</button>
+    <button type="button" class="lbtn line" id="fo-done" hidden>Marcar tarea hecha</button>
+    <button type="button" class="lbtn line" id="fo-end">Salir</button>
+  </div>
+</div>
 <div class="toast" id="toast" role="status" hidden></div>
 
 <script>
@@ -680,12 +801,13 @@ let items = new Map(), loaded = false, sb = null, uid = null, recovering = false
 let view = "hoy", taskFilter = "pend", weekStart = monday(today());
 let calMode = "mes", monthCursor = today().slice(0, 8) + "01", selDay = today(), evMode = "una";
 const weekdaysPicked = new Set();
+const CATS = {estudios: "Estudios", deporte: "Deporte", trabajo: "Trabajo", personal: "Personal"};
 const WD = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"];
 const wdOf = s => (parse(s).getDay() + 6) % 7;
 const timeRange = e => e.time ? e.time + (e.end ? "–" + e.end : "") : "Todo el día";
 const byTime = (a, b) => (a.time || "").localeCompare(b.time || "");
 const addMonths = (s, n) => { const d = parse(s); d.setDate(1); d.setMonth(d.getMonth() + n); return iso(d); };
-const eventsOn = d => [...byKind("event").filter(e => e.date === d), ...byKind("fixed").filter(f => (f.weekdays || []).includes(wdOf(d)))].sort(byTime);
+const eventsOn = d => [...byKind("event").filter(e => e.date === d), ...byKind("fixed").filter(f => (f.weekdays || []).includes(wdOf(d)) && !(f.skip || []).includes(d))].sort(byTime);
 const joinEs = a => a.length < 2 ? (a[0] || "") : a.slice(0, -1).join(", ") + " y " + a[a.length - 1];
 const queues = {};
 
@@ -721,25 +843,30 @@ const ej = o => o.example ? '<span class="pill ej">Ejemplo</span>' : "";
 const prioRank = {alta: 0, media: 1, baja: 2};
 const sortTasks = a => a.sort((x, y) => (x.due || "9999").localeCompare(y.due || "9999") || prioRank[x.prio] - prioRank[y.prio]);
 
+const catPill = o => CATS[o.cat] ? '<span class="pill cat-' + o.cat + '">' + CATS[o.cat] + "</span>" : "";
+const catClass = o => CATS[o.cat] ? " cat-" + o.cat : "";
+const editBtn = id => '<button type="button" class="x" data-act="edit" data-id="' + id + '" aria-label="Editar">✎</button>';
 function taskRow(t) {
   const late = t.due && t.due < today() && !t.done;
   return '<div class="row' + (t.done ? " done" : "") + '">' +
     '<input type="checkbox" id="c-' + t.id + '" data-act="task" data-id="' + t.id + '"' + (t.done ? " checked" : "") + ' aria-label="Marcar ' + esc(t.title) + '">' +
-    '<div class="main"><div class="title">' + esc(t.title) + '</div><div class="sub"><span class="pill ' + esc(t.prio) + '">' + esc(cap(t.prio)) + "</span>" +
+    '<div class="main"><div class="title">' + esc(t.title) + '</div><div class="sub"><span class="pill ' + esc(t.prio) + '">' + esc(cap(t.prio)) + "</span>" + catPill(t) +
     (t.due ? (late ? '<span class="late">Atrasada · ' + esc(shortDate(t.due)) + "</span>" : "<span>" + esc(shortDate(t.due)) + "</span>") : "") + ej(t) + "</div></div>" +
-    '<button type="button" class="x" data-act="del" data-id="' + t.id + '" data-l="Tarea" aria-label="Borrar tarea">×</button></div>';
+    (t.done ? "" : '<button type="button" class="x play" data-act="focus" data-id="' + t.id + '" aria-label="Concentrarme en esta tarea">▶\uFE0E</button>') +
+    '' + editBtn(t.id) + '<button type="button" class="x" data-act="del" data-id="' + t.id + '" data-l="Tarea" aria-label="Borrar tarea">×</button></div>';
 }
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
-function eventRow(e) {
+function eventRow(e, day) {
   const fijo = e.kind === "fixed";
-  return '<div class="row"><span class="time">' + esc(timeRange(e)) + '</span><div class="main"><div class="title">' + esc(e.title) + "</div>" + (fijo || e.example ? '<div class="sub">' + (fijo ? '<span class="pill fijo">Fijo</span>' : "") + ej(e) + "</div>" : "") + "</div>" +
+  return '<div class="row"><span class="time">' + esc(timeRange(e)) + '</span><div class="main"><div class="title">' + esc(e.title) + '</div><div class="sub">' + (fijo ? '<span class="pill fijo">Fijo</span>' : "") + catPill(e) + ej(e) +
+    (fijo && day ? '<button type="button" class="linkish" data-act="skip" data-id="' + e.id + '" data-d="' + day + '">Saltar este día</button>' : "") + "</div></div>" + editBtn(e.id) +
     (fijo ? "" : '<button type="button" class="x" data-act="del" data-id="' + e.id + '" data-l="Plan" aria-label="Borrar plan">×</button>') + "</div>";
 }
 const streak = h => { const set = new Set(h.days || []); let d = today(); if (!set.has(d)) d = addDays(d, -1); let n = 0; while (set.has(d)) { n++; d = addDays(d, -1); } return n; };
 function goalCard(g) {
   const p = g.progress || 0;
   return '<div class="goal"><div class="top"><div class="main">' + esc(g.title) + " " + ej(g) + '</div><span class="pct">' + p + '%</span>' +
-    '<button type="button" class="x" data-act="del" data-id="' + g.id + '" data-l="Objetivo" aria-label="Borrar objetivo">×</button></div>' +
+    '' + editBtn(g.id) + '<button type="button" class="x" data-act="del" data-id="' + g.id + '" data-l="Objetivo" aria-label="Borrar objetivo">×</button></div>' +
     '<input type="range" id="r-' + g.id + '" min="0" max="100" step="5" value="' + p + '" data-goal="' + g.id + '" aria-label="Progreso de ' + esc(g.title) + '">' + "</div>";
 }
 
@@ -753,7 +880,7 @@ function renderHoy() {
   const hasEx = [...items.values()].some(v => v.example);
   $("hoy-banner").innerHTML = hasEx ? '<div class="banner"><span>Lo que ves son datos de ejemplo para enseñarte cómo funciona.</span><button type="button" class="ghost" data-act="clear-ex">Borrar ejemplos</button></div>' : "";
   $("hoy-tasks").innerHTML = tasks.length ? '<div class="list">' + tasks.map(taskRow).join("") + "</div>" : empty("Nada pendiente para hoy.");
-  $("hoy-events").innerHTML = events.length ? '<div class="list">' + events.map(eventRow).join("") + "</div>" : empty("Sin planes hoy. Añádelos desde Calendario.");
+  $("hoy-events").innerHTML = events.length ? '<div class="list">' + events.map(e => eventRow(e, t)).join("") + "</div>" : empty("Sin planes hoy. Añádelos desde Calendario.");
   $("hoy-habits").innerHTML = habits.length ? '<div class="list">' + habits.map(h => {
     const on = (h.days || []).includes(t);
     return '<div class="row' + (on ? " done" : "") + '"><input type="checkbox" id="h-' + h.id + '" data-act="habit" data-id="' + h.id + '" data-day="' + t + '"' + (on ? " checked" : "") + ' aria-label="Hecho: ' + esc(h.title) + '"><div class="main"><div class="title">' + esc(h.title) + '</div></div><span class="streak">' + streak(h) + " d</span></div>";
@@ -778,9 +905,9 @@ function renderSemana() {
     let html = "", d = first;
     do {
       for (let i = 0; i < 7; i++) {
-        const ev = eventsOn(d), ts = tasks.filter(x => x.due === d && !x.done), all = [...ev.map(e => ({c: "", l: (e.time ? e.time + " " : "") + e.title})), ...ts.map(x => ({c: " t", l: x.title}))];
-        html += '<button type="button" class="cell' + (d.slice(0, 7) !== monthCursor.slice(0, 7) ? " out" : "") + (d === t ? " today" : "") + (d === selDay ? " sel" : "") + '" data-act="sel" data-d="' + d + '" aria-label="' + esc(fmt(d, {weekday: "long", day: "numeric", month: "long"})) + ", " + plural(all.length, "cosa", "cosas") + '"><span class="n">' + parse(d).getDate() + '</span><span class="evs">' +
-          all.slice(0, 3).map(a => '<span class="ev' + a.c + '">' + esc(a.l) + "</span>").join("") + (all.length > 3 ? '<span class="ev more">+' + (all.length - 3) + " más</span>" : "") + '</span><span class="dots">' + all.slice(0, 4).map(a => '<i class="' + a.c.trim() + '"></i>').join("") + "</span></button>";
+        const ev = eventsOn(d), ts = tasks.filter(x => x.due === d && !x.done), all = [...ev.map(e => ({c: catClass(e), l: (e.time ? e.time + " " : "") + e.title, d: e.kind === "event" ? e.id : ""})), ...ts.map(x => ({c: " t" + catClass(x), l: x.title, d: x.id}))];
+        html += '<div role="button" tabindex="0" data-drop="' + d + '" class="cell' + (d.slice(0, 7) !== monthCursor.slice(0, 7) ? " out" : "") + (d === t ? " today" : "") + (d === selDay ? " sel" : "") + '" data-act="sel" data-d="' + d + '" aria-label="' + esc(fmt(d, {weekday: "long", day: "numeric", month: "long"})) + ", " + plural(all.length, "cosa", "cosas") + '"><span class="n">' + parse(d).getDate() + '</span><span class="evs">' +
+          all.slice(0, 3).map(a => '<span class="ev' + a.c + '"' + (a.d ? ' draggable="true" data-drag="' + a.d + '"' : "") + ">" + esc(a.l) + "</span>").join("") + (all.length > 3 ? '<span class="ev more">+' + (all.length - 3) + " más</span>" : "") + '</span><span class="dots">' + all.slice(0, 4).map(a => '<i class="' + a.c.trim() + '"></i>').join("") + "</span></div>";
         d = addDays(d, 1);
       }
     } while (d <= last);
@@ -788,7 +915,7 @@ function renderSemana() {
     const ev = eventsOn(selDay), ts = sortTasks(tasks.filter(x => x.due === selDay));
     $("day-detail").hidden = false;
     $("day-detail").innerHTML = "<h2>" + esc(cap(fmt(selDay, {weekday: "long", day: "numeric", month: "long"}))) + "</h2>" +
-      (ev.length + ts.length ? '<div class="list">' + ev.map(eventRow).join("") + ts.map(taskRow).join("") + "</div>" : empty("No tienes nada este día.")) +
+      (ev.length + ts.length ? '<div class="list">' + ev.map(e => eventRow(e, selDay)).join("") + ts.map(taskRow).join("") + "</div>" : empty("No tienes nada este día.")) +
       '<div><button type="button" class="ghost" data-act="pick" data-d="' + selDay + '">+ Añadir un plan este día</button></div>';
   } else {
     const end = addDays(weekStart, 6);
@@ -798,15 +925,15 @@ function renderSemana() {
     let html = "";
     for (let i = 0; i < 7; i++) {
       const d = addDays(weekStart, i), ev = eventsOn(d), ts = tasks.filter(x => x.due === d);
-      html += '<div class="day' + (d === t ? " today" : "") + '"><div class="dayhead"><span>' + esc(fmt(d, {weekday: "short"})) + "</span><strong>" + parse(d).getDate() + "</strong></div>" +
-        ev.map(e => '<div class="chip"><div>' + (e.time ? "<b>" + esc(timeRange(e)) + "</b> " : "") + esc(e.title) + "</div>" + (e.kind === "fixed" ? "" : '<button type="button" data-act="del" data-id="' + e.id + '" data-l="Plan" aria-label="Borrar plan">×</button>') + "</div>").join("") +
-        ts.map(x => '<div class="chip t' + (x.done ? " fin" : "") + '"><div>' + esc(x.title) + "</div></div>").join("") +
+      html += '<div data-drop="' + d + '" class="day' + (d === t ? " today" : "") + '"><div class="dayhead"><span>' + esc(fmt(d, {weekday: "short"})) + "</span><strong>" + parse(d).getDate() + "</strong></div>" +
+        ev.map(e => '<div class="chip' + catClass(e) + '"' + (e.kind === "event" ? ' draggable="true" data-drag="' + e.id + '"' : "") + '><div data-act="edit" data-id="' + e.id + '">' + (e.time ? "<b>" + esc(timeRange(e)) + "</b> " : "") + esc(e.title) + "</div>" + (e.kind === "fixed" ? "" : '<button type="button" data-act="del" data-id="' + e.id + '" data-l="Plan" aria-label="Borrar plan">×</button>') + "</div>").join("") +
+        ts.map(x => '<div class="chip t' + catClass(x) + (x.done ? " fin" : "") + '" draggable="true" data-drag="' + x.id + '"><div data-act="edit" data-id="' + x.id + '">' + esc(x.title) + "</div></div>").join("") +
         '<button type="button" class="ghost plus" data-act="pick" data-d="' + d + '" aria-label="Añadir plan el ' + esc(fmt(d, {weekday: "long"})) + '">+ Añadir</button></div>';
     }
     $("week").innerHTML = html;
   }
   const fx = byKind("fixed").sort((a, b) => (a.weekdays[0] - b.weekdays[0]) || byTime(a, b));
-  $("fixed-list").innerHTML = fx.length ? '<div class="list">' + fx.map(f => '<div class="row"><span class="time">' + esc(timeRange(f)) + '</span><div class="main"><div class="title">' + esc(f.title) + '</div><div class="sub">' + esc(cap(joinEs([...f.weekdays].sort().map(w => WD[w])))) + '</div></div><button type="button" class="x" data-act="del" data-id="' + f.id + '" data-l="Plan fijo" aria-label="Borrar plan fijo">×</button></div>').join("") + "</div>" : empty("Añade lo que tienes siempre, como fútbol los martes.");
+  $("fixed-list").innerHTML = fx.length ? '<div class="list">' + fx.map(f => '<div class="row"><span class="time">' + esc(timeRange(f)) + '</span><div class="main"><div class="title">' + esc(f.title) + '</div><div class="sub">' + esc(cap(joinEs([...f.weekdays].sort().map(w => WD[w])))) + '</div></div>' + editBtn(f.id) + '<button type="button" class="x" data-act="del" data-id="' + f.id + '" data-l="Plan fijo" aria-label="Borrar plan fijo">×</button></div>').join("") + "</div>" : empty("Añade lo que tienes siempre, como fútbol los martes.");
 }
 function renderHabitos() {
   const hs = byKind("habit"), t = today(), mon = monday(t), L = "LMXJVSD";
@@ -816,15 +943,15 @@ function renderHabitos() {
       const d = addDays(mon, i), on = (h.days || []).includes(d);
       days += '<button type="button" class="d' + (on ? " on" : "") + (d === t ? " now" : "") + '" data-act="habit" data-id="' + h.id + '" data-day="' + d + '"' + (d > t ? " disabled" : "") + ' aria-pressed="' + on + '" aria-label="' + esc(fmt(d, {weekday: "long"})) + '">' + L[i] + "</button>";
     }
-    return '<div class="habit"><div class="main"><div>' + esc(h.title) + " " + ej(h) + '</div><div class="streak" style="margin-top:4px">Racha: ' + plural(streak(h), "día", "días") + '</div></div><div class="days">' + days + '</div><button type="button" class="x" data-act="del" data-id="' + h.id + '" data-l="Hábito" aria-label="Borrar hábito">×</button></div>';
+    return '<div class="habit"><div class="main"><div>' + esc(h.title) + " " + ej(h) + '</div><div class="streak" style="margin-top:4px">Racha: ' + plural(streak(h), "día", "días") + '</div></div><div class="days">' + days + '</div>' + editBtn(h.id) + '<button type="button" class="x" data-act="del" data-id="' + h.id + '" data-l="Hábito" aria-label="Borrar hábito">×</button></div>';
   }).join("") + "</div>" : empty("Todavía no hay hábitos. Empieza con uno pequeño.");
 }
 function renderNotas() {
   const notes = byKind("note").sort((a, b) => (b.created || 0) - (a.created || 0)), goals = byKind("goal");
-  $("notes-list").innerHTML = notes.length ? notes.map(n => '<div class="note"><div class="main">' + esc(n.text) + '<div class="sub"><span>' + (n.created ? esc(shortDate(iso(new Date(n.created)))) : "") + "</span>" + ej(n) + '</div></div><button type="button" class="x" data-act="del" data-id="' + n.id + '" data-l="Nota" aria-label="Borrar nota">×</button></div>').join("") : empty("Tus notas aparecerán aquí.");
+  $("notes-list").innerHTML = notes.length ? notes.map(n => '<div class="note"><div class="main">' + esc(n.text) + '<div class="sub"><span>' + (n.created ? esc(shortDate(iso(new Date(n.created)))) : "") + "</span>" + ej(n) + '</div></div>' + editBtn(n.id) + '<button type="button" class="x" data-act="del" data-id="' + n.id + '" data-l="Nota" aria-label="Borrar nota">×</button></div>').join("") : empty("Tus notas aparecerán aquí.");
   $("goals-list").innerHTML = goals.length ? goals.map(goalCard).join("") : empty("Escribe arriba lo que quieres conseguir.");
 }
-const renderers = {hoy: renderHoy, tareas: renderTareas, semana: renderSemana, habitos: renderHabitos, notas: renderNotas};
+const renderers = {hoy: renderHoy, tareas: renderTareas, semana: renderSemana, habitos: renderHabitos, notas: renderNotas, resumen: renderResumen};
 function render() { renderers[view](); }
 function show(v) {
   if (!renderers[v]) v = "hoy";
@@ -834,9 +961,269 @@ function show(v) {
   render();
 }
 
+
+/* Escritura natural */
+const B = "(?<![\\p{L}\\d])", E = "(?![\\p{L}\\d])", rx = s => new RegExp(B + s + E, "iu");
+const WDP = ["lunes", "martes", "mi[eé]rcoles", "jueves", "viernes", "s[aá]bados?", "domingos?"], WDALL = WDP.join("|");
+const validH = (h, m) => +h <= 23 && +(m || 0) <= 59;
+const hhmm = (h, m) => pad(+h) + ":" + (m || "00");
+function parseQuick(raw, now) {
+  let t = " " + raw.trim() + " ", date = "", time = "", end = "", weekdays = null, m, urgent = false;
+  const cut = x => { t = t.replace(x, " "); };
+  if ((m = t.match(rx("urgente")))) { urgent = true; cut(m[0]); }
+  if ((m = t.match(rx("(?:el\\s+)?(\\d{1,2})/(\\d{1,2})"))) && +m[2] >= 1 && +m[2] <= 12 && +m[1] >= 1 && +m[1] <= 31) {
+    let y = +now.slice(0, 4), c = y + "-" + pad(+m[2]) + "-" + pad(+m[1]);
+    if (c < now) c = (y + 1) + "-" + pad(+m[2]) + "-" + pad(+m[1]);
+    date = c; cut(m[0]);
+  }
+  if ((m = t.match(rx("(?:todos\\s+los|cada|los)\\s+((?:" + WDALL + ")(?:\\s*(?:,|y|e)\\s*(?:los\\s+)?(?:" + WDALL + "))*)")))) {
+    weekdays = WDP.map((p, i) => rx(p).test(m[1]) ? i : -1).filter(i => i >= 0); cut(m[0]);
+  } else if (!date && (m = t.match(rx("(?:(?:el|este)\\s+)?(" + WDALL + ")")))) {
+    const w = WDP.findIndex(p => rx(p).test(m[1]));
+    date = addDays(now, (w - wdOf(now) + 7) % 7); cut(m[0]);
+  }
+  if (!date && !weekdays) {
+    if ((m = t.match(rx("pasado\\s+m(?:añ|an)ana")))) { date = addDays(now, 2); cut(m[0]); }
+    else if ((m = t.match(rx("m(?:añ|an)ana")))) { date = addDays(now, 1); cut(m[0]); }
+    else if ((m = t.match(rx("hoy")))) { date = now; cut(m[0]); }
+  }
+  if ((m = t.match(rx("(?:de\\s+|a\\s+las?\\s+)?(\\d{1,2})(?:[:.h](\\d{2}))?\\s*(?:-|–|a|hasta)\\s*(?:las?\\s+)?(\\d{1,2})(?:[:.h](\\d{2}))?h?"))) && validH(m[1], m[2]) && validH(m[3], m[4])) {
+    time = hhmm(m[1], m[2]); end = hhmm(m[3], m[4]); cut(m[0]);
+    if (end <= time) end = "";
+  } else if ((m = t.match(rx("(?:a\\s+las?\\s+)?(\\d{1,2})[:.h](\\d{2})h?"))) && validH(m[1], m[2])) { time = hhmm(m[1], m[2]); cut(m[0]); }
+  else if ((m = t.match(rx("a\\s+las?\\s+(\\d{1,2})"))) && validH(m[1])) { time = hhmm(m[1]); cut(m[0]); }
+  else if ((m = t.match(rx("(\\d{1,2})h"))) && validH(m[1])) { time = hhmm(m[1]); cut(m[0]); }
+  else if ((date || weekdays) && (m = t.match(/(?<![\p{L}\d])(\d{1,2})\s*$/u)) && validH(m[1])) { time = hhmm(m[1]); t = t.slice(0, m.index) + " "; }
+  let title = t.replace(/\s+/g, " ").trim(), prev;
+  do { prev = title; title = title.replace(/^(el|la|los|las|de|a|y|para)\s+/i, "").replace(/\s+(el|la|los|las|de|a|y|para|todos|cada)$/i, ""); } while (prev !== title);
+  title = title || raw.trim();
+  title = title.charAt(0).toUpperCase() + title.slice(1);
+  const l = title.toLowerCase();
+  const cat = /f[uú]tbol|gimnasio|\bgym\b|correr|p[aá]del|baloncesto|nataci[oó]n|entren|yoga/.test(l) ? "deporte" : /examen|estudiar|clases?\b|apuntes|deberes|curso|universidad/.test(l) ? "estudios" : /reuni[oó]n|cliente|oficina|factura|turno|curro/.test(l) ? "trabajo" : "";
+  if (weekdays && weekdays.length) return {kind: "fixed", title, cat, weekdays, time, end, skip: []};
+  if (time) return {kind: "event", title, cat, date: date || now, time, end};
+  return {kind: "task", title, cat, prio: urgent ? "alta" : "media", due: date || now, done: false};
+}
+function describeQuick(o) {
+  if (o.kind === "fixed") return o.title + ", cada " + joinEs(o.weekdays.map(w => WD[w])) + (o.time ? " a las " + timeRange(o) : "");
+  if (o.kind === "event") return o.title + ", " + shortDate(o.date).toLowerCase() + " · " + timeRange(o);
+  return o.title + ", tarea para " + shortDate(o.due).toLowerCase();
+}
+
+/* Editor */
+let editId = null, editWd = new Set(), editSkips = [];
+function openEditor(id) {
+  const o = items.get(id); if (!o) return;
+  editId = id; editSkips = [...(o.skip || [])]; editWd = new Set(o.weekdays || []);
+  const cats = '<label>Categoría<select id="ed-cat"><option value="">Sin categoría</option>' + Object.keys(CATS).map(k => '<option value="' + k + '"' + (o.cat === k ? " selected" : "") + ">" + CATS[k] + "</option>").join("") + "</select></label>";
+  const times = '<div class="ed-two"><label>Desde<input type="time" id="ed-time" value="' + esc(o.time || "") + '"></label><label>Hasta<input type="time" id="ed-end" value="' + esc(o.end || "") + '"></label></div>';
+  let f = "";
+  if (o.kind === "note") f = '<label>Nota<textarea id="ed-text" required>' + esc(o.text) + "</textarea></label>";
+  else f = '<label>Nombre<input type="text" id="ed-title" required value="' + esc(o.title) + '"></label>';
+  if (o.kind === "task") f += '<div class="ed-two"><label>Prioridad<select id="ed-prio">' + ["alta", "media", "baja"].map(p => '<option value="' + p + '"' + (o.prio === p ? " selected" : "") + ">" + cap(p) + "</option>").join("") + '</select></label><label>Fecha<input type="date" id="ed-due" value="' + esc(o.due || "") + '"></label></div>' + cats;
+  if (o.kind === "event") f += '<label>Día<input type="date" id="ed-date" required value="' + esc(o.date) + '"></label>' + times + cats;
+  if (o.kind === "fixed") {
+    f += '<div class="days">' + "LMXJVSD".split("").map((l, i) => '<button type="button" class="d' + (editWd.has(i) ? " on" : "") + '" data-act="edw" data-w="' + i + '" aria-pressed="' + editWd.has(i) + '" aria-label="' + WD[i] + '">' + l + "</button>").join("") + "</div>" + times + cats;
+    if (editSkips.length) f += '<label>Días saltados. Toca uno para recuperarlo.</label><div class="skips">' + editSkips.map(d => '<button type="button" class="pill ej" style="border:0" data-act="unskip" data-d="' + d + '">' + esc(fmt(d, {day: "numeric", month: "short"})) + " ×</button>").join("") + "</div>";
+  }
+  const del = o.kind === "fixed" ? '<button type="button" class="btn sec" id="ed-del" style="margin-right:auto">Borrar</button>' : "";
+  $("ed-form").innerHTML = "<h2>Editar</h2>" + f + '<div class="ed-act">' + del + '<button type="button" class="btn sec" data-act="edcancel">Cancelar</button><button class="btn" value="ok">Guardar</button></div>';
+  if ($("ed-del")) $("ed-del").onclick = () => { $("editor").close(); removeWithUndo(id, "Plan fijo"); };
+  $("editor").showModal();
+}
+$("ed-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const o = items.get(editId); if (!o) return $("editor").close();
+  const val = id => $(id) ? $(id).value : undefined, next = {...o};
+  if (o.kind === "note") { const t = val("ed-text").trim(); if (!t) return; next.text = t; }
+  else { const t = val("ed-title").trim(); if (!t) return; next.title = t; }
+  if (o.kind === "task") Object.assign(next, {prio: val("ed-prio"), due: val("ed-due"), cat: val("ed-cat")});
+  if (o.kind === "event" || o.kind === "fixed") {
+    const time = val("ed-time"), end = val("ed-end");
+    if (end && !time) return toast("Pon también la hora de inicio.");
+    if (end && end <= time) return toast("La hora de fin tiene que ser posterior a la de inicio.");
+    Object.assign(next, {time, end, cat: val("ed-cat")});
+  }
+  if (o.kind === "event") { if (!val("ed-date")) return; next.date = val("ed-date"); }
+  if (o.kind === "fixed") { if (!editWd.size) return toast("Elige al menos un día de la semana."); next.weekdays = [...editWd].sort(); next.skip = editSkips; }
+  save(editId, next); $("editor").close(); toast("Guardado");
+});
+
+/* Arrastrar */
+document.addEventListener("dragstart", e => { const d = e.target.closest && e.target.closest("[data-drag]"); if (d) { e.dataTransfer.setData("text/plain", d.dataset.drag); e.dataTransfer.effectAllowed = "move"; } });
+document.addEventListener("dragover", e => { const z = e.target.closest && e.target.closest("[data-drop]"); if (z) { e.preventDefault(); document.querySelectorAll(".over").forEach(x => x !== z && x.classList.remove("over")); z.classList.add("over"); } });
+document.addEventListener("dragend", () => document.querySelectorAll(".over").forEach(x => x.classList.remove("over")));
+document.addEventListener("drop", e => {
+  const z = e.target.closest && e.target.closest("[data-drop]"); if (!z) return;
+  e.preventDefault();
+  const id = e.dataTransfer.getData("text/plain"), o = items.get(id), d = z.dataset.drop;
+  if (!o) return;
+  if (o.kind === "event") save(id, {...o, date: d}); else if (o.kind === "task") save(id, {...o, due: d});
+  toast("Movido al " + fmt(d, {weekday: "long", day: "numeric"}));
+});
+document.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("cell")) { e.preventDefault(); e.target.click(); } });
+
+/* Concentración */
+const fo = {task: null, total: 1500, left: 1500, end: 0, run: false, timer: 0, rest: false};
+const foShow = () => {
+  const l = Math.max(0, Math.ceil(fo.left));
+  $("fo-clock").textContent = pad(Math.floor(l / 60)) + ":" + pad(l % 60);
+  $("fo-needle").style.transform = "rotate(" + ((1 - fo.left / fo.total) * 360) + "deg)";
+};
+function foStart(min) {
+  foLog();
+  fo.rest = min === 5; fo.total = fo.left = min * 60; fo.end = Date.now() + fo.left * 1000; fo.run = true;
+  $("fo-pause").textContent = "Pausar"; foShow();
+  clearInterval(fo.timer); fo.timer = setInterval(foTick, 300);
+}
+function foLog() {
+  if (fo.rest || fo.total === fo.left) return;
+  const min = Math.floor((fo.total - fo.left) / 60);
+  if (min >= 1 && uid) { const before = rewardState(); create({kind: "focus", date: today(), min}); celebrate(before); }
+  fo.left = fo.total;
+}
+function foTick() {
+  if (!fo.run) return;
+  fo.left = (fo.end - Date.now()) / 1000; foShow();
+  if (fo.left <= 0) { fo.left = 0; fo.run = false; clearInterval(fo.timer); chime(); foLog(); $("fo-clock").textContent = "¡Hecho!"; $("fo-pause").textContent = "Otra vez"; }
+}
+function chime() { try { const c = new (window.AudioContext || window.webkitAudioContext)(); [660, 880].forEach((f, i) => { const o = c.createOscillator(), g = c.createGain(); o.frequency.value = f; g.gain.setValueAtTime(.15, c.currentTime + i * .25); g.gain.exponentialRampToValueAtTime(.001, c.currentTime + i * .25 + .4); o.connect(g).connect(c.destination); o.start(c.currentTime + i * .25); o.stop(c.currentTime + i * .25 + .4); }); } catch (e) {} }
+function openFocus(id) {
+  const t = id ? items.get(id) : null;
+  fo.task = t ? id : null;
+  $("fo-what").textContent = t ? t.title : "Tiempo para concentrarte";
+  $("fo-done").hidden = !t; $("focus").hidden = false;
+  fo.left = fo.total = 1; foStart(25);
+}
+$("fo-pause").onclick = () => {
+  if (fo.left <= 0) return foStart(Math.round(fo.total / 60));
+  fo.run = !fo.run;
+  if (fo.run) { fo.end = Date.now() + fo.left * 1000; }
+  $("fo-pause").textContent = fo.run ? "Pausar" : "Seguir";
+};
+$("fo-end").onclick = () => { foLog(); fo.run = false; clearInterval(fo.timer); $("focus").hidden = true; };
+$("fo-done").onclick = () => { const t = items.get(fo.task); if (t && !t.done) { const before = rewardState(); save(fo.task, {...t, done: true, doneOn: today()}); celebrate(before); } $("fo-end").onclick(); };
+document.querySelectorAll("[data-fo]").forEach(b => b.onclick = () => foStart(+b.dataset.fo));
+
+/* Resumen e insignias */
+const bestStreak = days => { const a = [...new Set(days || [])].sort(); let best = 0, n = 0, p = null; a.forEach(d => { n = p && addDays(p, 1) === d ? n + 1 : 1; best = Math.max(best, n); p = d; }); return best; };
+function badges() {
+  const done = byKind("task").filter(t => t.done).length, foc = byKind("focus").length, best = Math.max(0, ...byKind("habit").map(h => bestStreak(h.days)));
+  return [
+    ["t1", "Primer paso", "Completa una tarea", done >= 1], ["t10", "En marcha", "Completa 10 tareas", done >= 10], ["t50", "Imparable", "Completa 50 tareas", done >= 50],
+    ["s7", "Una semana", "Racha de 7 días", best >= 7], ["s30", "Un mes", "Racha de 30 días", best >= 30],
+    ["f1", "Sin distracciones", "Una sesión de concentración", foc >= 1], ["f10", "Mente clara", "10 sesiones de concentración", foc >= 10],
+    ["g1", "Meta cumplida", "Llega al 100% de un objetivo", byKind("goal").some(g => g.progress >= 100)], ["w1", "Con horario", "Añade una cosa fija", byKind("fixed").length >= 1]
+  ];
+}
+function dayDone() {
+  const t = today(), ts = byKind("task"), hs = byKind("habit");
+  if (ts.some(x => !x.done && x.due && x.due <= t)) return false;
+  if (hs.some(h => !(h.days || []).includes(t))) return false;
+  return ts.some(x => x.done && x.doneOn === t) || hs.length > 0;
+}
+const rewardState = () => ({day: dayDone(), got: new Set(badges().filter(b => b[3]).map(b => b[0]))});
+function celebrate(before) {
+  const fresh = badges().filter(b => b[3] && !before.got.has(b[0])), day = dayDone() && !before.day;
+  if (fresh.length) { toast("Insignia nueva: " + fresh[0][1]); confetti(); }
+  else if (day) { toast("Día completado. Buen trabajo."); confetti(); }
+}
+function confetti() {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const c = document.createElement("canvas"); c.className = "confetti"; document.body.appendChild(c);
+  c.width = innerWidth; c.height = innerHeight;
+  const g = c.getContext("2d"), col = ["#f2b632", "#3346d3", "#c62f3f", "#1b7450", "#b5246f"], t0 = performance.now();
+  const ps = Array.from({length: 130}, () => ({x: c.width / 2, y: c.height * .55, vx: (Math.random() - .5) * 15, vy: -Math.random() * 15 - 5, r: Math.random() * 6, s: 5 + Math.random() * 6, c: col[Math.floor(Math.random() * 5)]}));
+  (function f(n) {
+    g.clearRect(0, 0, c.width, c.height);
+    ps.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += .42; p.r += .15; g.save(); g.translate(p.x, p.y); g.rotate(p.r); g.fillStyle = p.c; g.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * .6); g.restore(); });
+    if (n - t0 < 1900) requestAnimationFrame(f); else c.remove();
+  })(t0);
+}
+function renderResumen() {
+  const mon = monday(today()), days = Array.from({length: 7}, (_, i) => addDays(mon, i)), set = new Set(days), L = "LMXJVSD", ts = byKind("task").filter(t => t.done && set.has(t.doneOn));
+  const hs = byKind("habit"), fm = byKind("focus").filter(f => set.has(f.date)).reduce((a, f) => a + (f.min || 0), 0);
+  const elapsed = days.filter(d => d <= today()).length, hit = hs.reduce((a, h) => a + (h.days || []).filter(d => set.has(d)).length, 0), pct = hs.length ? Math.round(hit / (hs.length * elapsed) * 100) : 0;
+  $("res-sub").textContent = "Semana " + weekNo(mon) + " · " + fmt(mon, {day: "numeric", month: "short"}) + " – " + fmt(days[6], {day: "numeric", month: "short"});
+  $("res-stats").innerHTML = [[ts.length, "tareas hechas"], [fm, "min de concentración"], [pct + "%", "de hábitos cumplidos"], [Math.max(0, ...hs.map(streak)), "días de mejor racha"]].map(a => '<div class="stat"><b>' + a[0] + "</b><span>" + a[1] + "</span></div>").join("");
+  const c = days.map(d => ts.filter(t => t.doneOn === d).length), max = Math.max(1, ...c);
+  $("res-chart").innerHTML = c.map((v, i) => '<div class="bar"><b>' + v + '</b><i style="height:' + Math.round(v / max * 110) + 'px"></i><span>' + L[i] + "</span></div>").join("");
+  const gs = byKind("goal");
+  $("res-goals").innerHTML = gs.length ? gs.map(goalCard).join("") : empty("Añade un objetivo en la sección Notas.");
+  $("res-badges").innerHTML = badges().map(b => '<div class="badge' + (b[3] ? "" : " off") + '"><svg viewBox="0 0 512 512" aria-hidden="true"><polygon points="256,40 340,256 172,256" fill="#f2b632"/><polygon points="172,256 340,256 256,472" fill="var(--accent)"/></svg><strong>' + b[1] + "</strong><span>" + b[2] + "</span></div>").join("");
+}
+
+/* Tema */
+function themeNow() { return document.documentElement.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); }
+function themeLabels() { const t = themeNow() === "dark" ? "Modo claro" : "Modo oscuro"; document.querySelectorAll(".theme-label").forEach(x => x.textContent = t); }
+document.addEventListener("click", e => {
+  if (e.target.closest("[data-theme-toggle]")) {
+    const n = themeNow() === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", n);
+    try { localStorage.setItem("rumbo-theme", n); } catch (err) {}
+    themeLabels();
+  }
+  if (e.target.closest("[data-top]")) window.scrollTo({top: 0, behavior: "smooth"});
+});
+
+/* Brújula al bajar */
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  let tick = false;
+  addEventListener("scroll", () => {
+    if (tick) return; tick = true;
+    requestAnimationFrame(() => { tick = false; const m = Math.max(1, document.documentElement.scrollHeight - innerHeight); document.documentElement.style.setProperty("--spin", Math.round(scrollY / m * 720)); });
+  }, {passive: true});
+}
+
+/* Demo de la presentación */
+const PRE = [
+  {k: "futbol", l: "Fútbol", w: [1], t: "19:00", e: "20:30", c: "deporte"}, {k: "gym", l: "Gimnasio", w: [0, 2, 4], t: "18:00", e: "19:30", c: "deporte"},
+  {k: "clases", l: "Clases", w: [0, 1, 2, 3], t: "16:00", e: "18:00", c: "estudios"}, {k: "curro", l: "Trabajo", w: [0, 1, 2, 3, 4], t: "09:00", e: "14:00", c: "trabajo"},
+  {k: "estudiar", l: "Estudiar", w: [5, 6], t: "10:00", e: "12:00", c: "estudios"}, {k: "amigos", l: "Amigos", w: [5], t: "21:00", e: "", c: "personal"}
+];
+let demoOn = new Set(["futbol", "gym"]), demoItems = [{kind: "task", title: "Entregar el trabajo", cat: "estudios", prio: "alta", due: addDays(monday(today()), 3), done: false}];
+function demoAll() { return [...PRE.filter(p => demoOn.has(p.k)).map(p => ({kind: "fixed", title: p.l, cat: p.c, weekdays: p.w, time: p.t, end: p.e, skip: []})), ...demoItems]; }
+function renderDemo() {
+  $("demo-chips").innerHTML = PRE.map(p => '<button type="button" data-pre="' + p.k + '" aria-pressed="' + demoOn.has(p.k) + '">' + p.l + "</button>").join("");
+  const all = demoAll(), N = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+  $("demo-week").innerHTML = N.map((n, i) => {
+    const xs = all.filter(o => o.kind === "fixed" ? o.weekdays.includes(i) : wdOf(o.kind === "event" ? o.date : o.due) === i).sort(byTime);
+    return '<div class="demo-day"><h3>' + n + "</h3>" + xs.map(o => o.kind === "task"
+      ? '<button type="button" class="chip t' + catClass(o) + (o.done ? " fin" : "") + '" data-demo-t="' + demoItems.indexOf(o) + '"><div>' + (o.done ? "✓ " : "○ ") + esc(o.title) + "</div></button>"
+      : '<div class="chip' + catClass(o) + '"><div>' + (o.time ? "<b>" + esc(o.time) + "</b> " : "") + esc(o.title) + "</div></div>").join("") + "</div>";
+  }).join("");
+}
+$("f-demo").addEventListener("submit", e => {
+  e.preventDefault();
+  const i = $("demo-input"), v = i.value.trim(); if (!v) return;
+  const o = parseQuick(v, today()); demoItems.push(o); i.value = "";
+  $("demo-msg").textContent = "Añadido: " + describeQuick(o); renderDemo();
+});
+document.addEventListener("click", e => {
+  const p = e.target.closest("[data-pre]");
+  if (p) { const k = p.dataset.pre; demoOn.has(k) ? demoOn.delete(k) : demoOn.add(k); renderDemo(); return; }
+  const t = e.target.closest("[data-demo-t]");
+  if (t) { const o = demoItems[+t.dataset.demoT]; if (o) { o.done = !o.done; renderDemo(); } }
+});
+$("demo-clear").onclick = () => { demoOn.clear(); demoItems = []; $("demo-msg").textContent = ""; renderDemo(); };
+$("demo-save").onclick = () => {
+  try { localStorage.setItem("rumbo-pending", JSON.stringify(demoAll())); } catch (e) {}
+  openAuth("signup");
+  authMsg("Crea tu cuenta y tu semana se guardará al entrar.");
+};
+function importPending() {
+  let list = null;
+  try { list = JSON.parse(localStorage.getItem("rumbo-pending") || "null"); localStorage.removeItem("rumbo-pending"); } catch (e) {}
+  if (Array.isArray(list) && list.length) { list.forEach(create); toast("Tu semana ya está guardada"); }
+}
+
 function formAdd(id, fn) { $(id).addEventListener("submit", e => { e.preventDefault(); fn(); }); }
-formAdd("f-quick", () => { const i = $("quick-title"), v = i.value.trim(); if (!v) return; create({kind: "task", title: v, prio: "media", due: today(), done: false}); i.value = ""; });
-formAdd("f-task", () => { const i = $("task-title"), v = i.value.trim(); if (!v) return; create({kind: "task", title: v, prio: $("task-prio").value, due: $("task-due").value, done: false}); i.value = ""; $("task-due").value = ""; toast("Tarea añadida"); });
+formAdd("f-quick", () => {
+  const i = $("quick-title"), v = i.value.trim(); if (!v) return;
+  const o = parseQuick(v, today());
+  create(o); i.value = ""; toast("Añadido: " + describeQuick(o));
+});
+formAdd("f-task", () => { const i = $("task-title"), v = i.value.trim(); if (!v) return; create({kind: "task", title: v, prio: $("task-prio").value, cat: $("task-cat").value, due: $("task-due").value, done: false}); i.value = ""; $("task-due").value = ""; toast("Tarea añadida"); });
 formAdd("f-event", () => {
   const i = $("ev-title"), v = i.value.trim(), time = $("ev-time").value, end = $("ev-end").value;
   if (!v) return;
@@ -844,13 +1231,13 @@ formAdd("f-event", () => {
   if (end && end <= time) return toast("La hora de fin tiene que ser posterior a la de inicio.");
   if (evMode === "fijo") {
     if (!weekdaysPicked.size) return toast("Elige al menos un día de la semana.");
-    create({kind: "fixed", title: v, weekdays: [...weekdaysPicked].sort(), time, end});
+    create({kind: "fixed", title: v, cat: $("ev-cat").value, weekdays: [...weekdaysPicked].sort(), time, end, skip: []});
     weekdaysPicked.clear(); syncEventForm();
     toast("Añadido cada semana");
   } else {
     const date = $("ev-date").value;
     if (!date) return toast("Elige el día.");
-    create({kind: "event", title: v, date, time, end});
+    create({kind: "event", title: v, cat: $("ev-cat").value, date, time, end});
     selDay = date; monthCursor = date.slice(0, 8) + "01"; weekStart = monday(date);
     toast("Plan añadido");
   }
@@ -869,12 +1256,29 @@ document.addEventListener("click", e => {
   const a = e.target.closest("[data-act]");
   if (!a) return;
   const {act, id} = a.dataset;
-  if (act === "task") { const t = items.get(id); if (t) save(id, {...t, done: !t.done}); }
+  if (act === "task") {
+    const t = items.get(id); if (!t) return;
+    const before = rewardState(), done = !t.done, {doneOn, ...rest} = t;
+    save(id, done ? {...rest, done, doneOn: today()} : {...rest, done});
+    celebrate(before);
+  }
+  else if (act === "edit") openEditor(id);
+  else if (act === "focus") openFocus(id);
+  else if (act === "skip") {
+    const f = items.get(id), d = a.dataset.d; if (!f) return;
+    save(id, {...f, skip: [...(f.skip || []), d].slice(-200)});
+    toast(f.title + " saltado ese día", () => { const g = items.get(id); if (g) save(id, {...g, skip: (g.skip || []).filter(x => x !== d)}); });
+  }
+  else if (act === "unskip") { const d = a.dataset.d; editSkips = editSkips.filter(x => x !== d); a.remove(); }
+  else if (act === "edw") { const w = +a.dataset.w; editWd.has(w) ? editWd.delete(w) : editWd.add(w); a.classList.toggle("on", editWd.has(w)); a.setAttribute("aria-pressed", editWd.has(w)); }
+  else if (act === "edcancel") $("editor").close();
   else if (act === "habit") {
     const h = items.get(id); if (!h) return;
     const days = new Set(h.days || []), d = a.dataset.day;
     days.has(d) ? days.delete(d) : days.add(d);
+    const before = rewardState();
     save(id, {...h, days: [...days].sort().slice(-400)});
+    celebrate(before);
   }
   else if (act === "del") removeWithUndo(id, a.dataset.l);
   else if (act === "filter") { taskFilter = a.dataset.f; render(); }
@@ -913,6 +1317,7 @@ async function loadItems() {
   if (error) { loaded = true; $("status").textContent = "No se pueden cargar tus datos ahora. Comprueba tu conexión y recarga la página."; $("status").hidden = false; render(); return; }
   items = new Map(data.map(r => [r.id, r.data]));
   loaded = true; $("status").hidden = true;
+  importPending();
   if (!document.activeElement || document.activeElement.type !== "range") render();
 }
 
@@ -994,6 +1399,8 @@ function applySession(session) {
 function boot() {
   $("ev-date").value = today();
   syncEventForm();
+  renderDemo();
+  themeLabels();
   setAuth("login");
   if (!window.supabase || SUPABASE_URL.startsWith("PEGA_")) {
     $("landing").hidden = true; $("auth").hidden = false; $("f-auth").hidden = true;
