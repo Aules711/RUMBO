@@ -7,6 +7,12 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Rumbo">
 <title>Rumbo</title>
+<meta name="description" content="Rumbo reúne tu calendario, tus horarios fijos, tareas, hábitos y objetivos en una sola app gratuita para móvil y ordenador.">
+<meta property="og:title" content="Rumbo: tu semana bajo control">
+<meta property="og:description" content="Calendario, horarios fijos, tareas, hábitos y objetivos en una sola app gratuita.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rumboapp-kappa.vercel.app/">
+<meta property="og:image" content="https://rumboapp-kappa.vercel.app/icon-512.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Crect width=%22512%22 height=%22512%22 rx=%22112%22 fill=%22%233346d3%22 stroke=%22none%22/%3E%3Cg transform=%22rotate%2835 256 256%29%22%3E%3Cpolygon points=%22256%2C72 322%2C256 190%2C256%22 fill=%22%23f2b632%22 stroke=%22none%22/%3E%3Cpolygon points=%22190%2C256 322%2C256 256%2C440%22 fill=%22%23ffffff%22 stroke=%22none%22/%3E%3C/g%3E%3C/svg%3E">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -192,12 +198,173 @@ input[type="checkbox"]:checked::after { content: ""; width: 6px; height: 11px; b
   .toast { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
 }
 @media (prefers-reduced-motion: no-preference) { .view { animation: in .18s ease-out; } @keyframes in { from { transform: translateY(4px); } } }
+
+/* Presentación: banda cobalto con la aguja de la brújula como gesto principal. */
+:root { --hero: #2434b5; --hero-ink: #ffffff; --hero-soft: #c9d0ff; --needle: #f2b632; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.hero { position: relative; overflow: hidden; background: var(--hero); color: var(--hero-ink); }
+.hero .wrap { position: relative; }
+.bignd { position: absolute; width: 760px; height: 760px; right: -150px; top: -130px; opacity: .13; pointer-events: none; }
+.lbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 20px; }
+.lbrand { display: flex; align-items: center; gap: 10px; font: 800 26px/1 var(--display); letter-spacing: -.02em; }
+.lbrand svg { width: 34px; height: 34px; border-radius: 9px; box-shadow: 0 0 0 1px rgba(255,255,255,.25); }
+.lbtn { min-height: 46px; padding: 8px 20px; border-radius: 12px; font-weight: 700; border: 0; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+.lbtn.solid { background: var(--needle); color: #241a00; }
+.lbtn.solid:hover { filter: brightness(1.06); }
+.lbtn.line { background: transparent; color: var(--hero-ink); box-shadow: inset 0 0 0 2px rgba(255,255,255,.45); }
+.lbtn.line:hover { background: rgba(255,255,255,.1); }
+.herogrid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 48px; align-items: center; padding-block: 40px 88px; }
+.hero h1 { font: 800 clamp(48px, 8.4vw, 96px)/.96 var(--display); letter-spacing: -.04em; text-wrap: balance; }
+.hero h1 em { font-style: normal; color: var(--needle); }
+.hero .lead { font-size: 20px; line-height: 1.45; color: var(--hero-soft); max-width: 30em; margin-top: 22px; }
+.cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.freenote { margin-top: 14px; font-size: 14px; color: var(--hero-soft); }
+.mock { background: var(--surface); color: var(--ink); border-radius: 22px; padding: 18px; display: flex; flex-direction: column; gap: 12px; transform: rotate(1.6deg); box-shadow: 0 30px 60px rgba(8,12,50,.38); }
+.mock h3 { margin: 0; font: 800 22px/1 var(--display); letter-spacing: -.02em; }
+.mgrid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; }
+.mgrid span { position: relative; aspect-ratio: 1; display: grid; place-items: center; font: 600 13px/1 var(--body); border-radius: 8px; background: var(--bg); font-variant-numeric: tabular-nums; }
+.mgrid .dw { background: none; color: var(--muted); aspect-ratio: auto; padding-block: 2px; font-size: 12px; }
+.mgrid .fx::after { content: ""; position: absolute; bottom: 5px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.mgrid .nw { background: var(--today); color: var(--on-today); font-weight: 800; }
+.mock .row { padding: 8px 2px; min-height: 0; }
+.tick { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--muted); }
+.tick.on { background: var(--accent); border-color: var(--accent); }
+.lsec { padding-block: 72px; }
+.lsec h2 { font: 800 clamp(32px, 5vw, 52px)/1.04 var(--display); letter-spacing: -.03em; text-wrap: balance; max-width: 16em; }
+.feats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 56px; margin-top: 40px; }
+.feat { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.feat h3 { margin: 0; font: 700 24px/1.15 var(--display); letter-spacing: -.015em; }
+.feat p { color: var(--muted); max-width: 34em; }
+.feat .demo { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-bottom: 8px; min-height: 42px; font-weight: 600; }
+.demo .big { font: 800 30px/1 var(--display); color: var(--accent); font-variant-numeric: tabular-nums; }
+.demo .d { pointer-events: none; }
+.meter { flex: 1 1 140px; height: 10px; background: var(--sunk); border-radius: 99px; overflow: hidden; max-width: 240px; }
+.meter i { display: block; width: 65%; height: 100%; background: var(--accent); }
+.band { background: var(--sunk); }
+.steps { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.steps li { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.steps b { font: 800 44px/1 var(--display); color: var(--accent); }
+.steps h3 { margin: 0; font: 700 21px/1.2 var(--display); }
+.steps p { color: var(--muted); }
+.private { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 56px; align-items: center; }
+.private ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 18px; }
+.private li { display: flex; gap: 10px; align-items: flex-start; }
+.private li::before { content: ""; flex: none; width: 10px; height: 10px; margin-top: 8px; background: var(--today); transform: rotate(45deg); }
+.final { background: var(--hero); color: var(--hero-ink); }
+.final .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; padding-block: 56px; }
+.final h2 { font: 800 clamp(30px, 5vw, 48px)/1.05 var(--display); letter-spacing: -.03em; text-wrap: balance; }
+.lfoot { color: var(--muted); font-size: 14px; padding-block: 24px; }
+.auth-back { align-self: flex-start; padding-left: 0; }
+@media (max-width: 860px) {
+  .herogrid, .private { grid-template-columns: minmax(0, 1fr); }
+  .herogrid { padding-block: 24px 64px; gap: 44px; }
+  .feats, .steps { grid-template-columns: minmax(0, 1fr); }
+  .lsec { padding-block: 52px; }
+  .bignd { width: 520px; height: 520px; right: -190px; top: -60px; }
+  .mock { transform: none; }
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 </head>
 <body>
+<div id="landing">
+  <section class="hero">
+    <svg class="bignd" viewBox="0 0 512 512" aria-hidden="true"><g transform="rotate(35 256 256)"><polygon points="256,20 340,256 172,256" fill="#ffffff"/><polygon points="172,256 340,256 256,492" fill="#ffffff"/></g></svg>
+    <div class="wrap">
+      <div class="lbar">
+        <div class="lbrand"><svg aria-hidden="true" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#3346d3" stroke="none"/><g transform="rotate(35 256 256)"><polygon points="256,72 322,256 190,256" fill="#f2b632" stroke="none"/><polygon points="190,256 322,256 256,440" fill="#ffffff" stroke="none"/></g></svg>Rumbo</div>
+        <button type="button" class="lbtn line" data-land="login">Entrar</button>
+      </div>
+      <div class="herogrid">
+        <div>
+          <h1>Tu semana, con <em>rumbo</em>.</h1>
+          <p class="lead">Tus horarios, tareas, hábitos y objetivos en un solo sitio. Abres la app y sabes qué te toca hoy.</p>
+          <div class="cta">
+            <button type="button" class="lbtn solid" data-land="signup">Crear cuenta gratis</button>
+            <a class="lbtn line" href="#funciones">Ver qué incluye</a>
+          </div>
+          <p class="freenote">Funciona en el móvil y en el ordenador.</p>
+        </div>
+        <div class="mock" aria-hidden="true">
+          <h3>Noviembre</h3>
+          <div class="mgrid">
+            <span class="dw">L</span><span class="dw">M</span><span class="dw">X</span><span class="dw">J</span><span class="dw">V</span><span class="dw">S</span><span class="dw">D</span>
+            <span>2</span><span class="fx">3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
+            <span class="nw">9</span><span class="fx">10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+            <span>16</span><span class="fx">17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span>
+          </div>
+          <div>
+            <div class="row"><span class="time">19:00–20:30</span><div class="main"><div class="title">Fútbol</div></div><span class="pill fijo">Fijo</span></div>
+            <div class="row"><span class="tick"></span><div class="main"><div class="title">Entregar el trabajo</div></div><span class="pill alta">Alta</span></div>
+            <div class="row"><span class="tick on"></span><div class="main"><div class="title">Leer 20 minutos</div></div><span class="streak">5 días</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lsec" id="funciones">
+    <div class="wrap">
+      <h2>Todo lo que tienes que recordar, en una sola app.</h2>
+      <div class="feats">
+        <article class="feat">
+          <div class="demo"><span class="big">19:00</span><span>Fútbol, cada martes</span></div>
+          <h3>Horarios fijos</h3>
+          <p>Apunta una vez lo que tienes todas las semanas y aparecerá solo en tu calendario.</p>
+        </article>
+        <article class="feat">
+          <div class="demo"><span class="pill alta">Alta</span><span class="pill media">Media</span><span class="pill baja">Baja</span></div>
+          <h3>Tareas por hacer</h3>
+          <p>Ordénalas por prioridad y fecha. Las atrasadas se marcan para que no se te pasen.</p>
+        </article>
+        <article class="feat">
+          <div class="demo"><span class="big">30</span><span>días de un vistazo</span></div>
+          <h3>Calendario de mes y semana</h3>
+          <p>Mira el mes completo o céntrate en la semana, con tus planes y tareas juntos.</p>
+        </article>
+        <article class="feat">
+          <div class="demo"><div class="meter"><i></i></div><span>65%</span></div>
+          <h3>Hábitos, notas y objetivos</h3>
+          <p>Mantén tus rachas, guarda ideas al momento y sigue lo que quieres conseguir.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="lsec band">
+    <div class="wrap">
+      <h2>Empezar te lleva un minuto.</h2>
+      <ol class="steps">
+        <li><b>1</b><h3>Crea tu cuenta</h3><p>Solo necesitas un email y una contraseña.</p></li>
+        <li><b>2</b><h3>Apunta tu semana</h3><p>Añade tus horarios fijos y lo que tengas pendiente.</p></li>
+        <li><b>3</b><h3>Abre Hoy</h3><p>Cada día verás tus planes, tareas y hábitos en una pantalla.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="lsec">
+    <div class="wrap private">
+      <h2>Tu organización es solo tuya.</h2>
+      <ul>
+        <li>Cada cuenta ve únicamente sus propios datos.</li>
+        <li>Entras con tu email desde cualquier dispositivo.</li>
+        <li>Puedes añadirla a la pantalla de inicio del móvil.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Empieza a ordenar tu semana.</h2>
+      <button type="button" class="lbtn solid" data-land="signup">Crear cuenta gratis</button>
+    </div>
+  </section>
+  <footer class="wrap lfoot">Rumbo</footer>
+</div>
+
 <div class="auth" id="auth" hidden>
   <div class="auth-box">
+    <button type="button" class="ghost auth-back" id="auth-back">← Volver</button>
     <h1><svg aria-hidden="true" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#3346d3" stroke="none"/><g transform="rotate(35 256 256)"><polygon points="256,72 322,256 190,256" fill="#f2b632" stroke="none"/><polygon points="190,256 322,256 256,440" fill="#ffffff" stroke="none"/></g></svg>Rumbo</h1>
     <p id="auth-intro"></p>
     <div class="auth-msg" id="auth-msg" role="status" hidden></div>
@@ -588,7 +755,7 @@ document.querySelectorAll(".nav a").forEach(a => a.addEventListener("click", e =
   e.preventDefault(); show(a.dataset.v);
   try { location.hash = a.dataset.v; } catch (err) {}
 }));
-addEventListener("hashchange", () => show(location.hash.slice(1)));
+addEventListener("hashchange", () => { if (uid) show(location.hash.slice(1)); });
 
 async function loadItems() {
   const owner = uid;
@@ -613,6 +780,7 @@ function setAuth(mode) {
   $("auth-intro").textContent = c[0]; $("auth-btn").textContent = c[1]; $("auth-switch").textContent = c[2];
   $("auth-switch").hidden = !c[2];
   $("auth-forgot").hidden = mode !== "login";
+  $("auth-back").hidden = mode === "newpass";
   $("wrap-email").hidden = mode === "newpass";
   $("wrap-pass").hidden = mode === "forgot";
   $("auth-pass").autocomplete = mode === "login" ? "current-password" : "new-password";
@@ -647,12 +815,18 @@ $("f-auth").addEventListener("submit", async e => {
   } catch (err) { authMsg(authError(err)); }
   btn.disabled = false;
 });
+let firstAuth = true;
+function openAuth(mode) { authMsg(""); setAuth(mode); $("landing").hidden = true; $("auth").hidden = false; window.scrollTo(0, 0); }
+document.querySelectorAll("[data-land]").forEach(b => b.addEventListener("click", () => openAuth(b.dataset.land)));
+$("auth-back").addEventListener("click", () => { $("auth").hidden = true; $("landing").hidden = false; window.scrollTo(0, 0); });
 function applySession(session) {
   if (recovering) return;
   const next = session ? session.user.id : null;
   if (next === uid && next) return;
+  if (!next && !uid && !firstAuth) return;
+  firstAuth = false;
   uid = next; items = new Map(); loaded = false;
-  $("auth").hidden = !!uid; $("app").hidden = !uid;
+  $("auth").hidden = true; $("landing").hidden = !!uid; $("app").hidden = !uid;
   if (uid) {
     $("who").textContent = session.user.email || "";
     $("auth-pass").value = ""; authMsg("");
@@ -665,13 +839,14 @@ function boot() {
   syncEventForm();
   setAuth("login");
   if (!window.supabase || SUPABASE_URL.startsWith("PEGA_")) {
-    $("auth").hidden = false; $("f-auth").hidden = true;
+    $("landing").hidden = true; $("auth").hidden = false; $("f-auth").hidden = true;
     authMsg(window.supabase ? "Falta conectar la app con Supabase." : "No se ha podido cargar la app. Comprueba tu conexión y recarga la página.");
     return;
   }
+  try { if (Object.keys(localStorage).some(k => k.startsWith("sb-") && k.endsWith("-auth-token"))) $("landing").hidden = true; } catch (e) {}
   sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   sb.auth.onAuthStateChange((event, session) => {
-    if (event === "PASSWORD_RECOVERY") { recovering = true; $("app").hidden = true; $("auth").hidden = false; authMsg(""); setAuth("newpass"); return; }
+    if (event === "PASSWORD_RECOVERY") { recovering = true; $("app").hidden = true; $("landing").hidden = true; $("auth").hidden = false; authMsg(""); setAuth("newpass"); return; }
     setTimeout(() => applySession(session), 0);
   });
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && uid) loadItems(); });
