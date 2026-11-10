@@ -18,10 +18,10 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
-<meta name="theme-color" content="#3346d3">
+<meta name="theme-color" content="#0a0b10">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: agenda de una sola columna centrada en "hoy"; barra lateral en escritorio, barra inferior en móvil. */
 :root {
@@ -378,149 +378,334 @@ dialog::backdrop { background: rgba(8,12,40,.5); }
   .badges { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 720px) { .x { width: 30px; } .nav a { font-size: 11px; } }
+
+/* Web pública: estética oscura de producto, siempre oscura a propósito. */
+.pub { --bg: #0a0b10; --surface: #12141b; --sunk: #1a1d27; --line: rgba(255,255,255,.08); --ink: #eef0f5; --muted: #9aa1b2;
+  --accent: #6f8cff; --on-accent: #0a0b10; --accent-soft: #1f2748; --hero: #0e1530; --hero-ink: #eef0f5; --hero-soft: #aab2c8; --needle: #f2b632;
+  --today: #f2b632; --on-today: #241a00; --high: #ff8a95; --high-soft: #3a1c22; --mid: #f0c56f; --mid-soft: #3a2e14; --low: #6fdcb0; --low-soft: #15352b;
+  --c1: #c7aefb; --c1s: #2c2350; --c2: #8ad9b6; --c2s: #173a2d; --c3: #f3c67a; --c3s: #3d2c10; --c4: #f6a6cf; --c4s: #45203a;
+  --grad: linear-gradient(92deg, #6f8cff 0%, #a88bff 60%, #f2b632 130%);
+  --pfont: "Geist", "Figtree", system-ui, sans-serif;
+  color-scheme: dark; background: var(--bg); color: var(--ink); font-family: var(--pfont); }
+.pub h1, .pub h2, .pub h3, .pub .lbrand, .pub .aboutgrid h1, .pub .plan h3, .pub .deep h3, .pub .lsec h2, .pub .final h2, .pub .auth-box h1 { font-family: var(--pfont); }
+.pub .phead { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(10,11,16,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+.pub .phead-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+.pub .lbrand { display: flex; align-items: center; gap: 10px; font: 700 21px/1 var(--pfont); letter-spacing: -.02em; color: var(--ink); text-decoration: none; }
+.pub .lbrand svg { width: 32px; height: 32px; border-radius: 9px; box-shadow: none; }
+.pub .lbrand.small { font-size: 16px; } .pub .lbrand.small svg { width: 24px; height: 24px; border-radius: 7px; }
+.pub .phead-act { display: flex; align-items: center; gap: 6px; }
+.pbtn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 8px 18px; border-radius: 999px; border: 0; font: 600 15px/1 var(--pfont); text-decoration: none; cursor: pointer; transition: background .15s, transform .15s, box-shadow .15s; }
+.pbtn.primary { background: #4c74ff; color: #fff; box-shadow: 0 8px 24px rgba(76,116,255,.35); }
+.pbtn.primary:hover { background: #5d82ff; transform: translateY(-1px); }
+.pbtn.outline { background: rgba(255,255,255,.03); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+.pbtn.outline:hover { background: rgba(255,255,255,.07); }
+.pbtn.ghosty { background: none; color: var(--ink); }
+.pbtn.ghosty:hover { background: rgba(255,255,255,.06); }
+.pbtn.icon { width: 42px; padding: 0; background: rgba(255,255,255,.05); color: var(--ink); }
+.pbtn.icon svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.pbtn.big { min-height: 54px; padding: 12px 26px; font-size: 16px; border-radius: 16px; }
+.pbtn.full { width: 100%; }
+.pub .menu-list { background: var(--sunk); color: var(--ink); box-shadow: 0 20px 50px rgba(0,0,0,.5), inset 0 0 0 1px var(--line); }
+.pub .menu-list a:hover, .pub .menu-list button:hover { background: rgba(255,255,255,.06); }
+.pnav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding-block: 0 10px; }
+.pnav::-webkit-scrollbar { display: none; }
+.pnav a { flex: none; padding: 7px 12px; border-radius: 999px; color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+.pnav a:hover { color: var(--ink); }
+.pnav a.on { background: var(--accent-soft); color: #c3cdff; }
+.phero { position: relative; overflow: hidden; background: radial-gradient(900px 480px at 50% -80px, rgba(76,116,255,.28), transparent 70%), radial-gradient(600px 400px at 90% 30%, rgba(168,139,255,.14), transparent 70%); }
+.phero-in { display: flex; flex-direction: column; align-items: flex-start; padding-block: 56px 0; }
+.tagpill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: rgba(255,255,255,.04); box-shadow: inset 0 0 0 1px var(--line); font-size: 13px; color: var(--hero-soft); margin: 0 0 22px; }
+.spark { width: 8px; height: 8px; border-radius: 50%; background: var(--needle); box-shadow: 0 0 12px var(--needle); }
+.phero h1 { margin: 0; font: 700 clamp(46px, 8.6vw, 92px)/1 var(--pfont); letter-spacing: -.045em; text-wrap: balance; }
+.grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.plead { margin-top: 22px; max-width: 34em; font-size: clamp(17px, 2.1vw, 20px); line-height: 1.55; color: var(--hero-soft); }
+.pcta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.pnote { margin-top: 14px; font-size: 13px; color: var(--muted); }
+.phone { align-self: center; width: min(360px, 100%); margin-top: 56px; padding: 18px 16px 22px; border-radius: 40px 40px 0 0; background: linear-gradient(180deg, #161925, #0f1118 70%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), 0 -20px 80px rgba(76,116,255,.25); display: flex; flex-direction: column; gap: 12px; }
+.notch { align-self: center; width: 96px; height: 22px; border-radius: 99px; background: #050608; margin-bottom: 6px; }
+.ph-date { margin: 0; font-size: 12px; color: var(--muted); } .ph-hi { margin: -6px 0 0; font: 700 26px/1.1 var(--pfont); letter-spacing: -.02em; }
+.ph-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.ph-stats div { background: rgba(255,255,255,.04); border-radius: 14px; padding: 10px; display: flex; flex-direction: column; gap: 2px; }
+.ph-stats b { font: 700 22px/1 var(--pfont); color: #9fb2ff; font-variant-numeric: tabular-nums; } .ph-stats b.amb { color: var(--needle); }
+.ph-stats span { font-size: 11px; color: var(--muted); }
+.ph-card { background: linear-gradient(135deg, rgba(76,116,255,.22), rgba(168,139,255,.12)); border-radius: 18px; padding: 12px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+.ph-lab { margin: 0 0 6px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #c3cdff; }
+.ph-list { background: rgba(255,255,255,.03); border-radius: 18px; padding: 4px 12px; }
+.ph-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; min-width: 0; }
+.ph-list .ph-row + .ph-row { border-top: 1px solid var(--line); }
+.ph-row > div { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.ph-row strong { font-size: 14px; font-weight: 600; } .ph-row span { font-size: 12px; color: var(--muted); }
+.ph-row .late2 { color: var(--high); }
+.ph-time { font: 700 16px/1 var(--pfont); color: #fff; font-variant-numeric: tabular-nums; }
+.ph-tag { flex: none; font-size: 11px !important; padding: 3px 8px; border-radius: 99px; }
+.ph-tag.dep { background: var(--c2s); color: var(--c2) !important; }
+.ph-tick { flex: none; width: 20px; height: 20px; border-radius: 50%; box-shadow: inset 0 0 0 2px #4a5166; }
+.ph-tick.on { background: #4c74ff; box-shadow: none; }
+.ph-goal { display: flex; align-items: center; gap: 10px; font-size: 13px; background: rgba(255,255,255,.03); border-radius: 14px; padding: 10px 12px; }
+.ph-goal span { flex: none; } .ph-bar { flex: 1; height: 6px; border-radius: 9px; background: rgba(255,255,255,.08); overflow: hidden; }
+.ph-bar i { display: block; width: 65%; height: 100%; background: var(--grad); }
+.psec { padding-block: 88px 0; scroll-margin-top: 110px; }
+.phd { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+.eyebrow { margin: 0 0 12px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #8ea4ff; }
+.phd h2 { margin: 0; font: 700 clamp(30px, 4.6vw, 46px)/1.08 var(--pfont); letter-spacing: -.035em; text-wrap: balance; }
+.phd p { margin-top: 14px; color: var(--muted); font-size: 18px; }
+.pgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.pgrid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.pcard { background: var(--surface); border-radius: 24px; padding: 24px; box-shadow: inset 0 0 0 1px var(--line); min-width: 0; transition: transform .2s, box-shadow .2s; }
+.pcard:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1px rgba(111,140,255,.35); }
+.pcard h3 { margin: 16px 0 6px; font: 600 18px/1.25 var(--pfont); letter-spacing: -.01em; }
+.pcard p { color: var(--muted); font-size: 15px; line-height: 1.55; }
+.ico { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; background: var(--accent-soft); color: #9fb2ff; }
+.ico svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pbox { background: var(--surface); border-radius: 28px; padding: 24px; box-shadow: inset 0 0 0 1px var(--line); }
+.pbox.narrow { max-width: 620px; margin: 0 auto; }
+.pub .chips { margin-top: 0; } .pub .chips button { background: var(--sunk); color: var(--ink); font-family: var(--pfont); }
+.pub .chips button[aria-pressed="true"] { background: #4c74ff; color: #fff; }
+.pub input[type="text"], .pub input[type="email"], .pub input[type="password"] { background: var(--bg); border-color: var(--line); color: var(--ink); border-radius: 14px; }
+.pub .demo-msg { color: #9fb2ff; } .pub .demo-day { background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); }
+.ptable-wrap { overflow-x: auto; background: var(--surface); border-radius: 24px; box-shadow: inset 0 0 0 1px var(--line); }
+.ptable { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px; }
+.ptable th, .ptable td { padding: 16px 18px; text-align: center; border-bottom: 1px solid var(--line); }
+.ptable tbody tr:last-child th, .ptable tbody tr:last-child td { border-bottom: 0; }
+.ptable thead th { font-size: 13px; color: var(--muted); font-weight: 600; }
+.ptable tbody th { text-align: left; font-weight: 500; }
+.ptable .us { background: rgba(76,116,255,.08); color: #c3cdff; font-weight: 700; }
+.yes { color: var(--low); font-weight: 700; font-size: 18px; } .no { color: #5b6275; font-size: 18px; } .mid { color: var(--mid); font-size: 13px; }
+.psteps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.psteps b { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #4c74ff; color: #fff; font: 700 18px/1 var(--pfont); }
+.seg { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); margin-bottom: 18px; }
+.seg button { min-height: 38px; padding: 6px 18px; border: 0; border-radius: 999px; background: none; color: var(--muted); font: 600 14px/1 var(--pfont); }
+.seg button[aria-pressed="true"] { background: var(--sunk); color: var(--ink); }
+.inst { margin: 0; padding: 0; list-style: none; counter-reset: s; display: flex; flex-direction: column; gap: 10px; }
+.inst li { counter-increment: s; display: flex; align-items: center; gap: 14px; padding: 12px 14px; background: var(--bg); border-radius: 16px; }
+.inst li::before { content: counter(s); flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: #c3cdff; font-weight: 700; font-size: 14px; }
+.pplans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; max-width: 860px; margin: 0 auto; }
+.plan2 { display: flex; flex-direction: column; gap: 6px; position: relative; padding: 28px; }
+.plan2 h3 { margin: 0; } .pprice { font: 700 46px/1.05 var(--pfont); letter-spacing: -.04em; }
+.sub2 { color: var(--muted); font-size: 14px; margin-bottom: 14px !important; }
+.pro2 { background: linear-gradient(160deg, #1a2350, #12141b 70%); box-shadow: inset 0 0 0 1px rgba(111,140,255,.4); }
+.pro2 .pprice { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.badge2 { position: absolute; top: 22px; right: 22px; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 99px; background: rgba(242,182,50,.15); color: var(--needle); }
+.ticks { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 15px; }
+.ticks li { display: flex; gap: 10px; } .ticks li::before { content: "✓"; color: #8ea4ff; font-weight: 700; }
+.plan2 .pbtn { margin-top: auto; }
+.pub .faq { margin: 0 auto; } .pub .faq details { background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); border-radius: 18px; padding: 18px 20px; }
+.pub .faq summary { list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.pub .faq summary::-webkit-details-marker { display: none; }
+.pub .faq summary::after { content: "+"; color: var(--muted); font-size: 20px; line-height: 1; }
+.pub .faq details[open] summary::after { content: "–"; }
+.pfinal { text-align: center; padding: 64px 24px; border-radius: 32px; background: radial-gradient(600px 300px at 50% 0, rgba(76,116,255,.35), transparent 70%), var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.pfinal h2 { margin: 0; font: 700 clamp(30px, 5vw, 50px)/1.05 var(--pfont); letter-spacing: -.035em; text-wrap: balance; }
+.pfinal p { margin-top: 12px; color: var(--muted); font-size: 18px; } .pfinal .pcta { justify-content: center; }
+.pfoot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding-block: 56px 40px; color: var(--muted); font-size: 14px; }
+.pfoot .lbrand { margin-right: auto; } .pfoot a { color: var(--muted); text-decoration: none; } .pfoot a:hover { color: var(--ink); }
+.pub .scrollc { background: var(--sunk); box-shadow: 0 10px 30px rgba(0,0,0,.5), inset 0 0 0 1px var(--line); }
+[data-reveal] { transition: opacity .6s ease, transform .6s ease; }
+.js-reveal [data-reveal]:not(.seen) { opacity: 0; transform: translateY(16px); }
+body:has(> #landing:not([hidden])), body:has(> #about:not([hidden])), body:has(> #auth:not([hidden])) { background: #0a0b10; }
+/* Qué es Rumbo y acceso */
+.pub .hero { background: radial-gradient(900px 480px at 30% -80px, rgba(76,116,255,.28), transparent 70%), var(--bg); }
+.pub .bignd { opacity: .05; }
+.pub .aboutgrid h1 { font-weight: 700; letter-spacing: -.045em; }
+.pub .aboutgrid h1 em { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pub .lsec h2 { font-weight: 700; letter-spacing: -.035em; }
+.pub .band { background: transparent; }
+.pub .shot, .pub .plan { background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); border-radius: 24px; }
+.pub .plan.pro { background: linear-gradient(160deg, #1a2350, #12141b 70%); box-shadow: inset 0 0 0 1px rgba(111,140,255,.4); }
+.pub .plan .solid-a, .pub .lbtn.solid { background: #4c74ff; color: #fff; border-radius: 999px; }
+.pub .final { background: transparent; } .pub .final .wrap { background: var(--surface); border-radius: 32px; box-shadow: inset 0 0 0 1px var(--line); margin-block: 40px; padding: 48px max(24px, env(safe-area-inset-left, 0px)); }
+.pub .lfoot { color: var(--muted); }
+.auth.pub { background: radial-gradient(700px 420px at 50% 0, rgba(76,116,255,.25), transparent 70%), var(--bg); }
+.pub .auth-box { background: var(--surface); padding: 28px; border-radius: 28px; box-shadow: inset 0 0 0 1px var(--line); }
+.pub .auth-box h1 { font-size: 34px; font-weight: 700; } .pub .auth-box h1 svg { width: 40px; height: 40px; }
+.pub .auth-box .btn { background: #4c74ff; color: #fff; border-radius: 999px; min-height: 48px; }
+.pub .auth-box .ghost { color: #9fb2ff; }
+.pub .auth-msg { background: var(--accent-soft); color: #dfe4ff; }
+@media (max-width: 960px) { .pgrid, .pgrid.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) {
+  .pgrid, .pgrid.four, .psteps, .pplans { grid-template-columns: minmax(0, 1fr); }
+  .hide-sm { display: none; }
+  .psec { padding-block: 64px 0; }
+  .phero-in { padding-block: 36px 0; }
+  .pbox { padding: 16px; border-radius: 22px; }
+  .pub .phead .pbtn.primary { padding: 8px 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .js-reveal [data-reveal]:not(.seen) { opacity: 1; transform: none; } .pbtn, .pcard { transition: none; } }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 </head>
 <body>
-<div id="landing">
-  <section class="hero">
-    <svg class="bignd" viewBox="0 0 512 512" aria-hidden="true"><g transform="rotate(35 256 256)"><polygon points="256,20 340,256 172,256" fill="#ffffff"/><polygon points="172,256 340,256 256,492" fill="#ffffff"/></g></svg>
-    <div class="wrap">
-      <div class="lbar">
-        <a class="lbrand" href="#inicio"><svg aria-hidden="true" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#3346d3" stroke="none"/><g transform="rotate(35 256 256)"><polygon points="256,72 322,256 190,256" fill="#f2b632" stroke="none"/><polygon points="190,256 322,256 256,440" fill="#ffffff" stroke="none"/></g></svg>Rumbo</a>
+<div id="landing" class="pub">
+  <header class="phead">
+    <div class="wrap phead-top">
+      <a class="lbrand" href="#inicio"><svg aria-hidden="true" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#3346d3" stroke="none"/><g transform="rotate(35 256 256)"><polygon points="256,72 322,256 190,256" fill="#f2b632" stroke="none"/><polygon points="190,256 322,256 256,440" fill="#ffffff" stroke="none"/></g></svg>Rumbo</a>
+      <div class="phead-act">
+        <button type="button" class="pbtn ghosty hide-sm" data-land="login">Entrar</button>
+        <button type="button" class="pbtn primary" data-land="signup">Empieza gratis</button>
         <div class="menu">
-          <button type="button" class="lbtn line" data-menu aria-expanded="false" aria-controls="menu-a">Menú <span aria-hidden="true">▾</span></button>
+          <button type="button" class="pbtn icon" data-menu aria-expanded="false" aria-controls="menu-a" aria-label="Menú"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
           <div class="menu-list" id="menu-a" hidden>
             <a href="#que-es-rumbo">Qué es Rumbo</a>
             <button type="button" data-land="login">Iniciar sesión</button>
             <button type="button" data-land="signup">Registrarse</button>
-            <button type="button" data-theme-toggle><span class="theme-label">Modo oscuro</span></button>
           </div>
         </div>
       </div>
-      <div class="herogrid">
-        <div>
-          <h1>Tu semana, con <em>rumbo</em>.</h1>
-          <p class="lead">Tus horarios, tareas, hábitos y objetivos en un solo sitio. Abres la app y sabes qué te toca hoy.</p>
-          <div class="cta">
-            <button type="button" class="lbtn solid" data-land="signup">Crear cuenta gratis</button>
-            <a class="lbtn line" href="#que-es-rumbo">Qué es Rumbo</a>
-          </div>
-          <p class="freenote">Funciona en el móvil y en el ordenador.</p>
+    </div>
+    <nav class="wrap pnav" aria-label="Secciones"><a href="#funciones" data-sec="funciones">Funciones</a><a href="#prueba" data-sec="prueba">Pruébalo</a><a href="#por-que" data-sec="por-que">Por qué Rumbo</a><a href="#como" data-sec="como">Cómo funciona</a><a href="#instalar" data-sec="instalar">Instalar</a><a href="#planes" data-sec="planes">Planes</a><a href="#privacidad" data-sec="privacidad">Privacidad</a><a href="#preguntas" data-sec="preguntas">Preguntas</a></nav>
+  </header>
+  <section class="phero">
+    <div class="wrap phero-in">
+      <p class="tagpill"><span class="spark"></span>Organización personal, sin complicaciones</p>
+      <h1>Tu semana,<br><span class="grad">con rumbo.</span></h1>
+      <p class="plead">Apunta tus horarios, tareas y hábitos en segundos y abre la app sabiendo qué te toca hoy. Calendario, hábitos, objetivos y concentración en un solo sitio.</p>
+      <div class="pcta">
+        <button type="button" class="pbtn primary big" data-land="signup">Empieza gratis <span aria-hidden="true">›</span></button>
+        <button type="button" class="pbtn outline big" data-land="login">Ya tengo cuenta</button>
+      </div>
+      <p class="pnote">Gratis · sin tarjeta · en móvil y ordenador</p>
+      <div class="phone" aria-hidden="true">
+        <div class="notch"></div>
+        <p class="ph-date">Martes, 10 de noviembre</p>
+        <p class="ph-hi">Tu día</p>
+        <div class="ph-stats"><div><b>3</b><span>planes</span></div><div><b>4</b><span>tareas</span></div><div><b class="amb">12</b><span>días de racha</span></div></div>
+        <div class="ph-card"><p class="ph-lab">Ahora</p><div class="ph-row"><span class="ph-time">19:00</span><div><strong>Fútbol</strong><span>Hasta las 20:30 · Fijo</span></div><span class="ph-tag dep">Deporte</span></div></div>
+        <div class="ph-list">
+          <div class="ph-row"><span class="ph-tick on"></span><div><strong>Leer 20 minutos</strong><span>Hábito</span></div></div>
+          <div class="ph-row"><span class="ph-tick"></span><div><strong>Entregar el trabajo</strong><span class="late2">Hoy · Alta</span></div></div>
+          <div class="ph-row"><span class="ph-tick"></span><div><strong>Comprar regalo</strong><span>Mañana</span></div></div>
         </div>
-        <div class="mock" aria-hidden="true">
-          <h3>Noviembre</h3>
-          <div class="mgrid">
-            <span class="dw">L</span><span class="dw">M</span><span class="dw">X</span><span class="dw">J</span><span class="dw">V</span><span class="dw">S</span><span class="dw">D</span>
-            <span>2</span><span class="fx">3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
-            <span class="nw">9</span><span class="fx">10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
-            <span>16</span><span class="fx">17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span>
-          </div>
-          <div>
-            <div class="row"><span class="time">19:00–20:30</span><div class="main"><div class="title">Fútbol</div></div><span class="pill fijo">Fijo</span></div>
-            <div class="row"><span class="tick"></span><div class="main"><div class="title">Entregar el trabajo</div></div><span class="pill alta">Alta</span></div>
-            <div class="row"><span class="tick on"></span><div class="main"><div class="title">Leer 20 minutos</div></div><span class="streak">5 días</span></div>
-          </div>
+        <div class="ph-goal"><span>Terminar un curso</span><div class="ph-bar"><i></i></div><b>65%</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="psec" id="funciones">
+    <div class="wrap">
+      <div class="phd"><p class="eyebrow">Todo lo que necesitas</p><h2>Una app para toda tu semana</h2><p>Sin agendas de papel ni cinco apps distintas: Rumbo lo junta todo.</p></div>
+      <div class="pgrid"><article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><h3>Calendario de mes y semana</h3><p>Todo tu mes de un vistazo. Toca un día y ves lo que tienes.</p></article><article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"/></svg></span><h3>Horarios fijos</h3><p>Fútbol los martes o clase los jueves: lo apuntas una vez y se repite solo.</p></article><article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 7 2 2 4-4M4 17l2 2 4-4M14 7h6M14 17h6"/></svg></span><h3>Tareas con prioridad</h3><p>Ordenadas por fecha e importancia. Las atrasadas se marcan para que no se pierdan.</p></article><article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7V5h16v2M9 19h6M12 5v14"/></svg></span><h3>Escribe como hablas</h3><p>«Dentista viernes 10:30» y Rumbo entiende el día, la hora y el tipo.</p></article><article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg></span><h3>Arrastra y edita</h3><p>Mueve un plan a otro día o cambia cualquier detalle en un toque.</p></article><article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg></span><h3>Modo concentración</h3><p>Temporizador de 15, 25 o 50 minutos ligado a la tarea que tienes delante.</p></article><article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5"/></svg></span><h3>Hábitos y rachas</h3><p>Marca cada día lo que cumples y mira cómo crece tu racha.</p></article><article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h3>Resumen semanal</h3><p>Tareas hechas, minutos de concentración e insignias por tu constancia.</p></article><article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span><h3>Colores por categoría</h3><p>Estudios, Deporte, Trabajo y Personal, cada uno con su color.</p></article></div>
+    </div>
+  </section>
+
+  <section class="psec" id="prueba">
+    <div class="wrap">
+      <div class="phd"><p class="eyebrow">Pruébalo ahora</p><h2>Monta tu semana aquí mismo</h2><p>Elige lo que haces o escríbelo como te salga. No hace falta registrarse.</p></div>
+      <div class="pbox">
+        <div class="chips" id="demo-chips"></div>
+        <form class="add" id="f-demo">
+          <input class="grow" type="text" id="demo-input" placeholder="Prueba: dentista viernes 10:30" aria-label="Escribe un plan" autocomplete="off">
+          <button class="pbtn primary">Añadir</button>
+        </form>
+        <div class="demo-msg" id="demo-msg" role="status"></div>
+        <div class="demo-week" id="demo-week"></div>
+        <div class="pcta">
+          <button type="button" class="pbtn primary" id="demo-save">Guardar mi semana y registrarme</button>
+          <button type="button" class="pbtn outline" id="demo-clear">Empezar de cero</button>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="lsec band" id="prueba">
+  <section class="psec" id="por-que">
     <div class="wrap">
-      <h2>Monta tu semana aquí mismo.</h2>
-      <p class="lsub">Elige lo que haces o escríbelo como te salga. No hace falta registrarse para probarlo.</p>
-      <div class="chips" id="demo-chips"></div>
-      <form class="add" id="f-demo">
-        <input class="grow" type="text" id="demo-input" placeholder="Prueba: dentista viernes 10:30" aria-label="Escribe un plan" autocomplete="off">
-        <button class="btn">Añadir</button>
-      </form>
-      <div class="demo-msg" id="demo-msg" role="status"></div>
-      <div class="demo-week" id="demo-week"></div>
-      <div class="cta">
-        <button type="button" class="btn" id="demo-save">Guardar mi semana y registrarme</button>
-        <button type="button" class="btn sec" id="demo-clear">Empezar de cero</button>
-      </div>
+      <div class="phd"><p class="eyebrow">Por qué Rumbo</p><h2>Lo que no encontrarás junto en otro sitio</h2></div>
+      <div class="ptable-wrap"><table class="ptable">
+        <thead><tr><th scope="col"></th><th scope="col" class="us">Rumbo</th><th scope="col">Agenda de papel</th><th scope="col">Varias apps</th></tr></thead>
+        <tbody><tr><th scope="row">Horarios que se repiten solos</th><td class="us"><span class="yes" aria-label="Sí">✓</span></td><td><span class="no" aria-label="No">–</span></td><td><span class="mid">A veces</span></td></tr><tr><th scope="row">Tareas, hábitos y objetivos juntos</th><td class="us"><span class="yes" aria-label="Sí">✓</span></td><td><span class="no" aria-label="No">–</span></td><td><span class="no" aria-label="No">–</span></td></tr><tr><th scope="row">Escribir planes en lenguaje natural</th><td class="us"><span class="yes" aria-label="Sí">✓</span></td><td><span class="no" aria-label="No">–</span></td><td><span class="mid">A veces</span></td></tr><tr><th scope="row">Modo concentración incluido</th><td class="us"><span class="yes" aria-label="Sí">✓</span></td><td><span class="no" aria-label="No">–</span></td><td><span class="no" aria-label="No">–</span></td></tr><tr><th scope="row">En el móvil y el ordenador</th><td class="us"><span class="yes" aria-label="Sí">✓</span></td><td><span class="no" aria-label="No">–</span></td><td><span class="yes" aria-label="Sí">✓</span></td></tr><tr><th scope="row">Gratis</th><td class="us"><span class="yes" aria-label="Sí">✓</span></td><td><span class="yes" aria-label="Sí">✓</span></td><td><span class="mid">A veces</span></td></tr></tbody>
+      </table></div>
     </div>
   </section>
 
-  <section class="lsec" id="funciones">
+  <section class="psec" id="como">
     <div class="wrap">
-      <h2>Todo lo que tienes que recordar, en una sola app.</h2>
-      <div class="feats">
-        <article class="feat">
-          <div class="demo"><span class="big">19:00</span><span>Fútbol, cada martes</span></div>
-          <h3>Horarios fijos</h3>
-          <p>Apunta una vez lo que tienes todas las semanas y aparecerá solo en tu calendario.</p>
-        </article>
-        <article class="feat">
-          <div class="demo"><span class="pill alta">Alta</span><span class="pill media">Media</span><span class="pill baja">Baja</span></div>
-          <h3>Tareas por hacer</h3>
-          <p>Ordénalas por prioridad y fecha. Las atrasadas se marcan para que no se te pasen.</p>
-        </article>
-        <article class="feat">
-          <div class="demo"><span class="big">30</span><span>días de un vistazo</span></div>
-          <h3>Calendario de mes y semana</h3>
-          <p>Mira el mes completo o céntrate en la semana, con tus planes y tareas juntos.</p>
-        </article>
-        <article class="feat">
-          <div class="demo"><div class="meter"><i></i></div><span>65%</span></div>
-          <h3>Hábitos, notas y objetivos</h3>
-          <p>Mantén tus rachas, guarda ideas al momento y sigue lo que quieres conseguir.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="lsec band">
-    <div class="wrap">
-      <h2>Empezar te lleva un minuto.</h2>
-      <ol class="steps">
-        <li><b>1</b><h3>Crea tu cuenta</h3><p>Solo necesitas un email y una contraseña.</p></li>
-        <li><b>2</b><h3>Apunta tu semana</h3><p>Añade tus horarios fijos y lo que tengas pendiente.</p></li>
-        <li><b>3</b><h3>Abre Hoy</h3><p>Cada día verás tus planes, tareas y hábitos en una pantalla.</p></li>
+      <div class="phd"><p class="eyebrow">Cómo funciona</p><h2>Empieza en tres pasos</h2></div>
+      <ol class="psteps">
+        <li class="pcard" data-reveal><b>1</b><h3>Crea tu cuenta</h3><p>Solo un email y una contraseña. Sin tarjeta.</p></li>
+        <li class="pcard" data-reveal><b>2</b><h3>Apunta tu semana</h3><p>Añade lo fijo y lo pendiente, o escríbelo tal cual.</p></li>
+        <li class="pcard" data-reveal><b>3</b><h3>Abre Hoy cada mañana</h3><p>Tus planes, tareas y hábitos del día en una pantalla.</p></li>
       </ol>
     </div>
   </section>
 
-  <section class="lsec">
-    <div class="wrap private">
-      <h2>Tu organización es solo tuya.</h2>
-      <ul>
-        <li>Cada cuenta ve únicamente sus propios datos.</li>
-        <li>Entras con tu email desde cualquier dispositivo.</li>
-        <li>Puedes añadirla a la pantalla de inicio del móvil.</li>
-      </ul>
+  <section class="psec" id="instalar">
+    <div class="wrap">
+      <div class="phd"><p class="eyebrow">Instalar</p><h2>Tenla en el móvil en 4 toques</h2><p>Sin tienda de aplicaciones. Se abre como una app más.</p></div>
+      <div class="pbox narrow">
+        <div class="seg" role="group" aria-label="Tipo de móvil"><button type="button" data-os="ios" aria-pressed="true">iPhone</button><button type="button" data-os="android" aria-pressed="false">Android</button></div>
+        <ol class="inst" data-os-list="ios"><li>Abre esta web en <b>Safari</b>.</li><li>Toca el botón <b>Compartir</b>.</li><li>Elige <b>Añadir a pantalla de inicio</b>.</li><li>Toca <b>Añadir</b> y abre Rumbo desde su icono.</li></ol>
+        <ol class="inst" data-os-list="android" hidden><li>Abre esta web en <b>Chrome</b>.</li><li>Toca el menú <b>⋮</b> de arriba a la derecha.</li><li>Elige <b>Añadir a pantalla de inicio</b> o <b>Instalar aplicación</b>.</li><li>Confirma y abre Rumbo desde su icono.</li></ol>
+      </div>
     </div>
   </section>
 
-  <section class="final">
+  <section class="psec" id="planes">
     <div class="wrap">
-      <h2>Empieza a ordenar tu semana.</h2>
-      <button type="button" class="lbtn solid" data-land="signup">Crear cuenta gratis</button>
+      <div class="phd"><p class="eyebrow">Planes</p><h2>Empieza gratis. Premium, muy pronto.</h2></div>
+      <div class="pplans">
+        <article class="pcard plan2"><h3>Gratis</h3><div class="pprice">0 €</div><p class="sub2">Para siempre</p>
+          <ul class="ticks"><li>Calendario de mes y semana</li><li>Horarios fijos ilimitados</li><li>Tareas, hábitos, notas y objetivos</li><li>Modo concentración y resumen</li></ul>
+          <button type="button" class="pbtn outline full" data-land="signup">Crear cuenta gratis</button></article>
+        <article class="pcard plan2 pro2"><span class="badge2">Próximamente</span><h3>Premium</h3><div class="pprice">Pronto</div><p class="sub2">Para sacarle todo el partido</p>
+          <ul class="ticks"><li>Recordatorios antes de cada plan</li><li>Calendario compartido</li><li>Asistente que organiza tu semana</li><li>Sincronización con otros calendarios</li></ul>
+          <button type="button" class="pbtn primary full" data-land="signup">Empieza gratis mientras tanto</button></article>
+      </div>
     </div>
   </section>
-   <footer class="wrap lfoot">Rumbo</footer>
-  <button type="button" class="scrollc" data-top aria-label="Volver arriba"><svg viewBox="0 0 512 512" aria-hidden="true"><polygon points="256,40 330,256 182,256" fill="#f2b632"/><polygon points="182,256 330,256 256,472" fill="#3346d3"/></svg></button>
+
+  <section class="psec" id="privacidad">
+    <div class="wrap">
+      <div class="phd"><p class="eyebrow">Privacidad</p><h2>Tu organización es solo tuya</h2></div>
+      <div class="pgrid four">
+        <article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3>Datos separados</h3><p>Cada cuenta ve únicamente lo suyo.</p></article>
+        <article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><h3>Sin anuncios</h3><p>No mostramos publicidad dentro de la app.</p></article>
+        <article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><h3>En todos tus dispositivos</h3><p>Entras con tu email desde donde quieras.</p></article>
+        <article class="pcard" data-reveal><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/></svg></span><h3>Tú decides</h3><p>Borra cualquier entrada cuando quieras.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="psec" id="preguntas">
+    <div class="wrap">
+      <div class="phd"><p class="eyebrow">Preguntas</p><h2>Lo que quizá te preguntas</h2></div>
+      <div class="faq">
+        <details><summary>¿Rumbo es gratis?</summary><p>Sí. Puedes crear tu cuenta y usar todas las funciones actuales sin pagar.</p></details>
+        <details><summary>¿Tengo que instalar algo?</summary><p>No. Funciona en el navegador, y en el móvil puedes añadirla a la pantalla de inicio.</p></details>
+        <details><summary>¿Quién puede ver mis datos?</summary><p>Solo tú. Cada cuenta ve únicamente sus propios datos.</p></details>
+        <details><summary>¿Cómo se apunta algo que se repite?</summary><p>En Calendario elige «Todas las semanas», o escribe en Hoy algo como «fútbol todos los martes 19:00-20:30».</p></details>
+        <details><summary>¿Y si olvido la contraseña?</summary><p>En Iniciar sesión pulsa «He olvidado la contraseña» y te enviaremos un enlace por email.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="psec">
+    <div class="wrap"><div class="pfinal"><h2>Pon rumbo a tu semana hoy</h2><p>Crea tu cuenta en un minuto y empieza a ordenar tus días.</p><div class="pcta"><button type="button" class="pbtn primary big" data-land="signup">Empieza gratis <span aria-hidden="true">›</span></button></div></div></div>
+  </section>
+  <footer class="wrap pfoot"><span class="lbrand small"><svg aria-hidden="true" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#3346d3" stroke="none"/><g transform="rotate(35 256 256)"><polygon points="256,72 322,256 190,256" fill="#f2b632" stroke="none"/><polygon points="190,256 322,256 256,440" fill="#ffffff" stroke="none"/></g></svg>Rumbo</span><a href="#que-es-rumbo">Qué es Rumbo</a><a href="#preguntas">Preguntas</a></footer>
 </div>
 
-<div id="about" hidden>
-  <section class="hero">
-    <svg class="bignd" viewBox="0 0 512 512" aria-hidden="true"><g transform="rotate(35 256 256)"><polygon points="256,20 340,256 172,256" fill="#ffffff"/><polygon points="172,256 340,256 256,492" fill="#ffffff"/></g></svg>
-    <div class="wrap">
-      <div class="lbar">
-        <a class="lbrand" href="#inicio"><svg aria-hidden="true" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#3346d3" stroke="none"/><g transform="rotate(35 256 256)"><polygon points="256,72 322,256 190,256" fill="#f2b632" stroke="none"/><polygon points="190,256 322,256 256,440" fill="#ffffff" stroke="none"/></g></svg>Rumbo</a>
+<div id="about" class="pub" hidden>
+  <header class="phead">
+    <div class="wrap phead-top">
+      <a class="lbrand" href="#inicio"><svg aria-hidden="true" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#3346d3" stroke="none"/><g transform="rotate(35 256 256)"><polygon points="256,72 322,256 190,256" fill="#f2b632" stroke="none"/><polygon points="190,256 322,256 256,440" fill="#ffffff" stroke="none"/></g></svg>Rumbo</a>
+      <div class="phead-act">
+        <button type="button" class="pbtn ghosty hide-sm" data-land="login">Entrar</button>
+        <button type="button" class="pbtn primary" data-land="signup">Empieza gratis</button>
         <div class="menu">
-          <button type="button" class="lbtn line" data-menu aria-expanded="false" aria-controls="menu-b">Menú <span aria-hidden="true">▾</span></button>
+          <button type="button" class="pbtn icon" data-menu aria-expanded="false" aria-controls="menu-b" aria-label="Menú"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
           <div class="menu-list" id="menu-b" hidden>
             <a href="#que-es-rumbo">Qué es Rumbo</a>
             <button type="button" data-land="login">Iniciar sesión</button>
             <button type="button" data-land="signup">Registrarse</button>
-            <button type="button" data-theme-toggle><span class="theme-label">Modo oscuro</span></button>
           </div>
         </div>
       </div>
-      <div class="aboutgrid">
+    </div>
+    
+  </header>
+  <section class="hero">
+    <svg class="bignd" viewBox="0 0 512 512" aria-hidden="true"><g transform="rotate(35 256 256)"><polygon points="256,20 340,256 172,256" fill="#ffffff"/><polygon points="172,256 340,256 256,492" fill="#ffffff"/></g></svg>
+    <div class="wrap">
+            <div class="aboutgrid">
         <h1>Rumbo es el sitio donde tu semana <em>cobra sentido</em>.</h1>
         <p class="lead">Una app sencilla para saber qué tienes hoy, qué te queda por hacer y hacia dónde vas.</p>
         <div class="cta"><button type="button" class="lbtn solid" data-land="signup">Registrarse gratis</button></div>
@@ -603,7 +788,7 @@ dialog::backdrop { background: rgba(8,12,40,.5); }
   <button type="button" class="scrollc" data-top aria-label="Volver arriba"><svg viewBox="0 0 512 512" aria-hidden="true"><polygon points="256,40 330,256 182,256" fill="#f2b632"/><polygon points="182,256 330,256 256,472" fill="#3346d3"/></svg></button>
 </div>
 
-<div class="auth" id="auth" hidden>
+<div class="auth pub" id="auth" hidden>
   <div class="auth-box">
     <button type="button" class="ghost auth-back" id="auth-back">← Volver</button>
     <h1><svg aria-hidden="true" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#3346d3" stroke="none"/><g transform="rotate(35 256 256)"><polygon points="256,72 322,256 190,256" fill="#f2b632" stroke="none"/><polygon points="190,256 322,256 256,440" fill="#ffffff" stroke="none"/></g></svg>Rumbo</h1>
@@ -1217,6 +1402,27 @@ function importPending() {
   if (Array.isArray(list) && list.length) { list.forEach(create); toast("Tu semana ya está guardada"); }
 }
 
+
+/* Web pública: pestañas de sección, aparición y pestañas de instalación */
+document.querySelectorAll("[data-os]").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("[data-os]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  document.querySelectorAll("[data-os-list]").forEach(l => l.hidden = l.dataset.osList !== b.dataset.os);
+}));
+if ("IntersectionObserver" in window) {
+  document.documentElement.classList.add("js-reveal");
+  const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("seen"); rv.unobserve(e.target); } }), {rootMargin: "0px 0px -8% 0px"});
+  document.querySelectorAll("[data-reveal]").forEach(el => rv.observe(el));
+  const links = [...document.querySelectorAll(".pnav a")];
+  const so = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    links.forEach(a => { const on = a.dataset.sec === e.target.id; a.classList.toggle("on", on); if (on) a.scrollIntoView({block: "nearest", inline: "nearest"}); });
+  }), {rootMargin: "-45% 0px -50% 0px"});
+  links.forEach(a => { const t = document.getElementById(a.dataset.sec); if (t) so.observe(t); });
+}
+document.querySelectorAll(".pnav a, .pfoot a[href='#preguntas']").forEach(a => a.addEventListener("click", e => {
+  const t = document.getElementById(a.getAttribute("href").slice(1)); if (!t) return;
+  e.preventDefault(); t.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+}));
 function formAdd(id, fn) { $(id).addEventListener("submit", e => { e.preventDefault(); fn(); }); }
 formAdd("f-quick", () => {
   const i = $("quick-title"), v = i.value.trim(); if (!v) return;
